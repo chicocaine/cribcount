@@ -34,6 +34,10 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            array_merge(parent::share($request), [
+                'theme' => session('theme', 'light'),
+            ]),
         ];
+        
     }
 }
