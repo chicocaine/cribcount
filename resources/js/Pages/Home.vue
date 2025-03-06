@@ -13,9 +13,9 @@ import { Head } from '@inertiajs/vue3';
                     class="overflow-hidden "
                 >
                     <div class="p-6 text-zinc-900 dark:text-zinc-100">
-                        <!--Hero Page-->
-                        <div class="flex flex-col items-center justify-start text-center min-h-40vh px-4 py-24">
-                            <div class="flex items-center justift-start pb-4 gap-4">
+                        <div class="flex flex-col items-center justify-start text-center min-h-40vh px-4 py-24 text-zinc-900 dark:text-zinc-100">
+                            
+                            <div class="flex items-center justify-start pb-4 gap-4">
                                 <div class="flex items-start">
                                     <div class="flex items-center">
                                         <h1 class="text-[15vw] md:text-9xl font-bold text-orange-600 leading-none">C</h1>
@@ -26,8 +26,8 @@ import { Head } from '@inertiajs/vue3';
                                     </div>
                                 </div>
                             </div>
-                            <hr class="border-t-2 border-gray-300 my-4 w-full max-w-4xl mx-auto pb-2">
-                            <h6 class="text-lg text-zinc-100 text-center px-4">
+                            <hr class="border-t-2 border-gray-300 dark:border-gray-700 my-4 w-full max-w-4xl mx-auto pb-2">
+                            <h6 class="text-lg text-zinc-900 dark:text-zinc-100 text-center px-4">
                                 Know when to pay, what to pay, and how much to pay.
                             </h6>
 
@@ -36,18 +36,23 @@ import { Head } from '@inertiajs/vue3';
                                 <!-- Primary Button (Calculator) -->
                                 <a 
                                     :href="route('mortgage.calculator')" 
-                                    :class="{'bg-orange-600': route().current('mortgage.calculator'), 'bg-orange-600 hover:bg-orange-800': !route().current('mortgage.calculator')}"
-                                    class="px-6 py-2 text-white rounded-md shadow-md transition text-center sm:w-auto w-full"
+                                    :class="{
+                                        'bg-orange-600 dark:bg-orange-700 text-white': route().current('mortgage.calculator'), 
+                                        'bg-zinc-900 dark:bg-orange-600 hover:bg-zinc-700 dark:hover:bg-orange-500 border-zinc-900 hover:border-zinc-700 dark:border-orange-600 text-white': !route().current('mortgage.calculator')
+                                    }"
+                                    class="px-6 py-2 rounded-md shadow-md transition text-center sm:w-auto w-full border"
                                 >
                                     Calculator →
                                 </a>
 
                                 <!-- Secondary Button (How to Use) -->
-                                <a href="/how-to-use" class="px-6 py-2 text-white border border-white rounded-md hover:bg-white hover:text-orange-700 transition text-center sm:w-auto w-full">
+                                <a href="/how-to-use" 
+                                class="px-6 py-2 border rounded-md transition text-center sm:w-auto w-full 
+                                        border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white 
+                                        dark:border-white dark:text-white dark:hover:bg-zinc-200 dark:hover:text-zinc-950">
                                     How to Use
                                 </a>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -56,18 +61,24 @@ import { Head } from '@inertiajs/vue3';
             <!-- Cards -->
             <div class="flex flex-col items-center justify-start text-center min-h-[80vh] md:min-h-screen pt-24 pb-12 md:pb-6 bg-zinc-90 min-w-screen text-zinc-900 dark:text-zinc-100">
 
-                <div class="bg-zinc-900 min-h-screen md:min-h-[80vh] w-full flex flex-col items-center flex-grow">
+                <div class="bg-zinc-100 dark:bg-zinc-900 min-h-screen md:min-h-[80vh] w-full flex flex-col items-center flex-grow">
+
 
                     <!-- Heading -->
                     <div class="pt-24">
-                        <h6 class="text-orange-600 text-lg md:text-xl">Cribcount's Features</h6>
-                        <h1 class="text-3xl md:text-4xl font-bold">We do more than calculations</h1>
+                        <h6 class="text-orange-600 dark:text-orange-400 text-lg md:text-xl">
+                            Cribcount's Features
+                        </h6>
+                        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+                            We do more than calculations
+                        </h1>
                     </div>
+
 
                     <!-- Feature Cards -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-24 mx-auto w-full max-w-7xl px-6 md:px-16">
                         <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                            <svg width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">==
                             <path d="M23.4 40H28.6C35.1 40 37.7001 37.4 37.7001 30.9V23.1C37.7001 16.6 35.1 14 28.6 14H23.4C16.9 14 14.3 16.6 14.3 23.1V30.9C14.3 37.4 16.9 40 23.4 40Z" stroke="#FF7161" stroke-width="1.95" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M31.85 21.254V22.554C31.85 23.62 30.979 24.504 29.9 24.504H22.1C21.034 24.504 20.15 23.633 20.15 22.554V21.254C20.15 20.188 21.021 19.304 22.1 19.304H29.9C30.979 19.304 31.85 20.175 31.85 21.254Z" stroke="#FF7161" stroke-width="1.95" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M20.977 29.6H20.992" stroke="#FF7161" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -128,9 +139,11 @@ import { Head } from '@inertiajs/vue3';
                     <!-- Button -->
                     <div class="pt-24 md:pt-16 lg:pt-12 pb-6 md:pb-2 text-center flex-grow">
                         <a href="http://localhost/cribcount/public/Mortgage-Calculator" 
-                        class="bg-zinc-900 hover:bg-orange-800 border-orange-600 px-6 py-2 text-white border rounded-md hover:bg-zinc-850 hover:text-orange-700 transition dark:text-white shadow-md">
+                            class="bg-zinc-900 dark:bg-orange-600 hover:bg-zinc-700 dark:hover:bg-orange-500 
+                                border-zinc-900 hover:border-zinc-700 dark:border-orange-600 
+                                text-white px-6 py-2 rounded-md shadow-md transition border text-center sm:w-auto w-full">
                             Calculator →
-                        </a>
+                        </a>  
                     </div>
                 </div>
             </div>

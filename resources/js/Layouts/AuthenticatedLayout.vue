@@ -12,7 +12,7 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-h-screen bg-zinc-100 dark:bg-zinc-950">
+        <div class="min-h-screen bg-zinc-white dark:bg-zinc-950">
             <nav
                 class="bg-white dark:bg-zinc-950"
             >
