@@ -5,6 +5,7 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ThemeToggle from '@/Components/ThemeToggle.vue';
+import Footer from '@/Components/Footer.vue'; 
 import { Link } from '@inertiajs/vue3';
 
 const showingNavigationDropdown = ref(false);
@@ -12,10 +13,8 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-h-screen bg-zinc-white dark:bg-zinc-950">
-            <nav
-                class="bg-white dark:bg-zinc-950"
-            >
+        <div class="min-h-screen bg-zinc-white dark:bg-zinc-950 flex flex-col">
+            <nav class="bg-white dark:bg-zinc-950">
                 <div class="mx-auto max-w-7xl pt-4 px-4 sm:px-6 lg:px-8">
                     <div class="flex h-16 justify-between">
                         <div class="flex">
@@ -28,33 +27,14 @@ const showingNavigationDropdown = ref(false);
                             </div>
 
                             <!-- Nav Links -->
-                            <div
-                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
-                            >
-                                <NavLink
-                                    :href="route('home')"
-                                    :active="route().current('home')"
-                                >
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('home')" :active="route().current('home')">
                                     Home
                                 </NavLink>
-                            </div>
-                            <div
-                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
-                            >
-                                <NavLink
-                                    :href="route('mortgage.calculator')"
-                                    :active="route().current('mortgage.calculator')"
-                                >
+                                <NavLink :href="route('mortgage.calculator')" :active="route().current('mortgage.calculator')">
                                     Calculator
                                 </NavLink>
-                            </div>
-                            <div
-                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
-                            >
-                                <NavLink
-                                    :href="route('about')"
-                                    :active="route().current('about')"
-                                >
+                                <NavLink :href="route('about')" :active="route().current('about')">
                                     About
                                 </NavLink>
                             </div>
@@ -92,16 +72,10 @@ const showingNavigationDropdown = ref(false);
                                         </template>
 
                                         <template #content>
-                                            <DropdownLink
-                                                :href="route('profile.edit')"
-                                            >
+                                            <DropdownLink :href="route('profile.edit')">
                                                 Profile
                                             </DropdownLink>
-                                            <DropdownLink
-                                                :href="route('logout')"
-                                                method="post"
-                                                as="button"
-                                            >
+                                            <DropdownLink :href="route('logout')" method="post" as="button">
                                                 Log Out
                                             </DropdownLink>
                                         </template>
@@ -111,47 +85,27 @@ const showingNavigationDropdown = ref(false);
 
                             <template v-else>
                                 <div class="flex space-x-8">
-                                    <NavLink :href="route('login')">
-                                        Login
-                                    </NavLink>
-                                    <NavLink :href="route('register')">
-                                        Register
-                                    </NavLink>
+                                    <NavLink :href="route('login')"> Login </NavLink>
+                                    <NavLink :href="route('register')"> Register </NavLink>
                                 </div>
                             </template>
                         </div>
 
                         <div class="-me-2 flex items-center sm:hidden">
                             <button
-                                @click="
-                                    showingNavigationDropdown =
-                                        !showingNavigationDropdown
-                                "
+                                @click="showingNavigationDropdown = !showingNavigationDropdown"
                                 class="inline-flex items-center justify-center rounded-md p-2 text-zinc-400 transition duration-150 ease-in-out hover:bg-zinc-100 hover:text-zinc-500 focus:bg-zinc-100 focus:text-zinc-500 focus:outline-none dark:text-zinc-500 dark:hover:bg-zinc-900 dark:hover:text-zinc-400 dark:focus:bg-zinc-900 dark:focus:text-zinc-400"
                             >
-                                <svg
-                                    class="h-6 w-6"
-                                    stroke="currentColor"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                >
+                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path
-                                        :class="{
-                                            hidden: showingNavigationDropdown,
-                                            'inline-flex':
-                                                !showingNavigationDropdown,
-                                        }"
+                                        :class="{ hidden: showingNavigationDropdown, 'inline-flex': !showingNavigationDropdown }"
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
                                         stroke-width="2"
                                         d="M4 6h16M4 12h16M4 18h16"
                                     />
                                     <path
-                                        :class="{
-                                            hidden: !showingNavigationDropdown,
-                                            'inline-flex':
-                                                showingNavigationDropdown,
-                                        }"
+                                        :class="{ hidden: !showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
                                         stroke-width="2"
@@ -165,19 +119,19 @@ const showingNavigationDropdown = ref(false);
             </nav>
 
             <!-- Page Heading -->
-            <header
-                class="bg-white shadow dark:bg-zinc-800"
-                v-if="$slots.header"
-            >
+            <header class="bg-white shadow dark:bg-zinc-800" v-if="$slots.header">
                 <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                     <slot name="header" />
                 </div>
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="flex-grow">
                 <slot />
             </main>
+
+            <!-- Footer Component -->
+            <Footer />
         </div>
     </div>
 </template>

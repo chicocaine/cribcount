@@ -14,7 +14,7 @@ import { Head } from '@inertiajs/vue3';
                 >
                     <div class="p-6 text-zinc-900 dark:text-zinc-100">
                         <div class="flex flex-col items-center justify-start text-center min-h-40vh px-4 py-24 text-zinc-900 dark:text-zinc-100">
-                            
+
                             <div class="flex items-center justify-start pb-4 gap-4">
                                 <div class="flex items-start">
                                     <div class="flex items-center">
@@ -155,9 +155,7 @@ import { Head } from '@inertiajs/vue3';
                 <h1 class="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100">
                     Easily calculate your mortgage payments in just a few steps.
                 </h1>
-            </div>
-
-
+                </div>
                 <!-- Steps Container -->
                 <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                     <!-- Step 1 -->
@@ -194,6 +192,57 @@ import { Head } from '@inertiajs/vue3';
                     </div>
                 </div>
             </div>
+
+            <!-- footer -->
+            <footer class="bg-zinc-900 dark:bg-zinc-950 text-white py-10">
+                <div class="container mx-auto px-6 md:px-12 lg:px-24">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Logo & Description -->
+                        <div>
+                            <h2 class="text-2xl font-bold text-orange-500">Cribcount</h2>
+                            <p class="text-sm mt-3 text-zinc-400">
+                                Helping you make informed mortgage decisions with easy-to-use tools and insights.
+                            </p>
+                        </div>
+
+                        <!-- Navigation Links -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-orange-500">Quick Links</h3>
+                            <ul class="mt-3 space-y-2">
+                                <li><a href="#" class="hover:text-orange-400 transition">Home</a></li>
+                                <li><a href="#" class="hover:text-orange-400 transition">Mortgage Calculator</a></li>
+                                <li><a href="#" class="hover:text-orange-400 transition">About Us</a></li>
+                                <li><a href="#" class="hover:text-orange-400 transition">Contact</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Social Media Links -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-orange-500">Follow Us</h3>
+                            <div class="flex mt-3 space-x-4">
+                                <a href="#" class="hover:text-orange-400 transition">
+                                    <i class="fab fa-facebook text-xl"></i>
+                                </a>
+                                <a href="#" class="hover:text-orange-400 transition">
+                                    <i class="fab fa-twitter text-xl"></i>
+                                </a>
+                                <a href="#" class="hover:text-orange-400 transition">
+                                    <i class="fab fa-instagram text-xl"></i>
+                                </a>
+                                <a href="#" class="hover:text-orange-400 transition">
+                                    <i class="fab fa-linkedin text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- Copyright -->
+                    <div class="border-t border-zinc-700 mt-8 pt-6 text-center text-zinc-400 text-sm">
+                        © 2025 Cribcount. All rights reserved.
+                    </div>
+                </div>
+             </footer>
+
         </div>
     </AuthenticatedLayout>
 </template>
