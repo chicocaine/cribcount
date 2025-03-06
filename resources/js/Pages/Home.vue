@@ -8,7 +8,7 @@ import { Head } from '@inertiajs/vue3';
 
     <AuthenticatedLayout>
         <div class=" SX1">
-            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 lg:pt-16">
                 <div
                     class="overflow-hidden "
                 >
@@ -50,7 +50,7 @@ import { Head } from '@inertiajs/vue3';
                                 class="px-6 py-2 border rounded-md transition text-center sm:w-auto w-full 
                                         border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white 
                                         dark:border-white dark:text-white dark:hover:bg-zinc-200 dark:hover:text-zinc-950">
-                                    How to Use
+                                    TO DO
                                 </a>
                             </div>
                         </div>
@@ -149,7 +149,7 @@ import { Head } from '@inertiajs/vue3';
             </div>
 
             <!-- How It Works Section -->
-            <div class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white py-16 px-6 md:px-16">
+            <div class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white py-28 px-6 md:px-16">
                 <div class="max-w-7xl mx-auto text-center">
                 <h6 class="text-orange-600 text-lg md:text-xl">How It Works</h6>
                 <h1 class="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100">
@@ -192,57 +192,6 @@ import { Head } from '@inertiajs/vue3';
                     </div>
                 </div>
             </div>
-
-            <!-- footer -->
-            <footer class="bg-zinc-900 dark:bg-zinc-950 text-white py-10">
-                <div class="container mx-auto px-6 md:px-12 lg:px-24">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- Logo & Description -->
-                        <div>
-                            <h2 class="text-2xl font-bold text-orange-500">Cribcount</h2>
-                            <p class="text-sm mt-3 text-zinc-400">
-                                Helping you make informed mortgage decisions with easy-to-use tools and insights.
-                            </p>
-                        </div>
-
-                        <!-- Navigation Links -->
-                        <div>
-                            <h3 class="text-lg font-semibold text-orange-500">Quick Links</h3>
-                            <ul class="mt-3 space-y-2">
-                                <li><a href="#" class="hover:text-orange-400 transition">Home</a></li>
-                                <li><a href="#" class="hover:text-orange-400 transition">Mortgage Calculator</a></li>
-                                <li><a href="#" class="hover:text-orange-400 transition">About Us</a></li>
-                                <li><a href="#" class="hover:text-orange-400 transition">Contact</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Social Media Links -->
-                        <div>
-                            <h3 class="text-lg font-semibold text-orange-500">Follow Us</h3>
-                            <div class="flex mt-3 space-x-4">
-                                <a href="#" class="hover:text-orange-400 transition">
-                                    <i class="fab fa-facebook text-xl"></i>
-                                </a>
-                                <a href="#" class="hover:text-orange-400 transition">
-                                    <i class="fab fa-twitter text-xl"></i>
-                                </a>
-                                <a href="#" class="hover:text-orange-400 transition">
-                                    <i class="fab fa-instagram text-xl"></i>
-                                </a>
-                                <a href="#" class="hover:text-orange-400 transition">
-                                    <i class="fab fa-linkedin text-xl"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                     <!-- Copyright -->
-                    <div class="border-t border-zinc-700 mt-8 pt-6 text-center text-zinc-400 text-sm">
-                        © 2025 Cribcount. All rights reserved.
-                    </div>
-                </div>
-             </footer>
-
         </div>
     </AuthenticatedLayout>
 </template>

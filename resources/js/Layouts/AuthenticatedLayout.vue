@@ -13,8 +13,8 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-h-screen bg-zinc-white dark:bg-zinc-950 flex flex-col">
-            <nav class="bg-white dark:bg-zinc-950">
+        <div class="min-h-screen flex flex-col bg-zinc-white dark:bg-zinc-950 overflow-hidden">
+            <nav class="bg-white dark:bg-zinc-950 w-full fixed top-0 left-0 z-50 shadow-md">
                 <div class="mx-auto max-w-7xl pt-4 px-4 sm:px-6 lg:px-8">
                     <div class="flex h-16 justify-between">
                         <div class="flex">
@@ -126,12 +126,12 @@ const showingNavigationDropdown = ref(false);
             </header>
 
             <!-- Page Content -->
-            <main class="flex-grow">
+            <main class="flex-grow overflow-y-auto">
                 <slot />
             </main>
 
             <!-- Footer Component -->
-            <Footer />
+             <Footer class="w-full flex:shrink-0" />
         </div>
     </div>
 </template>
