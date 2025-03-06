@@ -68,23 +68,44 @@ import { Head } from '@inertiajs/vue3';
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-24 mx-auto w-full max-w-7xl px-6 md:px-16">
                         <div class="flex flex-col items-center md:items-start text-center md:text-left">
                             <svg width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="26.5" cy="26.5" r="26" stroke="#FF7161"/>
+                            <path d="M23.4 40H28.6C35.1 40 37.7001 37.4 37.7001 30.9V23.1C37.7001 16.6 35.1 14 28.6 14H23.4C16.9 14 14.3 16.6 14.3 23.1V30.9C14.3 37.4 16.9 40 23.4 40Z" stroke="#FF7161" stroke-width="1.95" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M31.85 21.254V22.554C31.85 23.62 30.979 24.504 29.9 24.504H22.1C21.034 24.504 20.15 23.633 20.15 22.554V21.254C20.15 20.188 21.021 19.304 22.1 19.304H29.9C30.979 19.304 31.85 20.175 31.85 21.254Z" stroke="#FF7161" stroke-width="1.95" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20.977 29.6H20.992" stroke="#FF7161" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M25.9938 29.6H26.0088" stroke="#FF7161" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M31.0107 29.6H31.0257" stroke="#FF7161" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20.977 34.15H20.992" stroke="#FF7161" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M25.9938 34.15H26.0088" stroke="#FF7161" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M31.0107 34.15H31.0257" stroke="#FF7161" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="26.5" cy="26.5" r="26" stroke="#FF7161"/>
                             </svg>
+
                             <h1 class="text-lg md:text-xl font-bold">Calculator</h1>
                             <h2 class="text-gray-600 text-sm md:text-base">Of course, we also have a calculator</h2>
                         </div>
 
                         <div class="flex flex-col items-center md:items-start text-center md:text-left">
                             <svg width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="26.5" cy="26.5" r="26" stroke="#FF7161"/>
+                            <circle cx="26.5" cy="26.5" r="26" stroke="#FF7161"/>
+                            <path d="M21.6 14.3999V17.9999" stroke="#FF7161" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M31.2 14.3999V17.9999" stroke="#FF7161" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16.2 22.908H36.6" stroke="#FF7161" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M38.4 34.8C38.4 35.7 38.148 36.552 37.704 37.272C36.876 38.664 35.352 39.6 33.6 39.6C32.388 39.6 31.2841 39.156 30.4441 38.4C30.0721 38.088 29.7481 37.704 29.4961 37.272C29.0521 36.552 28.8 35.7 28.8 34.8C28.8 32.148 30.948 30 33.6 30C35.04 30 36.324 30.636 37.2 31.632C37.944 32.484 38.4 33.588 38.4 34.8Z" stroke="#FF7161" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M31.728 34.8L32.916 35.988L35.472 33.624" stroke="#FF7161" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M37.2 22.2V31.6319C36.324 30.6359 35.04 30 33.6 30C30.948 30 28.8 32.148 28.8 34.8C28.8 35.7 29.052 36.5519 29.496 37.2719C29.748 37.7039 30.072 38.088 30.444 38.4H21.6C17.4 38.4 15.6 36 15.6 32.4V22.2C15.6 18.6 17.4 16.2 21.6 16.2H31.2C35.4 16.2 37.2 18.6 37.2 22.2Z" stroke="#FF7161" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M26.3946 28.4398H26.4054" stroke="#FF7161" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21.9532 28.4398H21.964" stroke="#FF7161" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21.9532 32.0399H21.964" stroke="#FF7161" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             <h1 class="text-lg md:text-xl font-bold">Amortization Schedule</h1>
                             <h2 class="text-gray-600 text-sm md:text-base">So that you can keep track of your payments</h2>
                         </div>
 
                         <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                            <svg width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+                             <svg width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="26.5" cy="26.5" r="26" stroke="#FF7161"/>
+                                <path d="M22.8 39H30C36 39 38.4 36.6 38.4 30.6V23.4C38.4 17.4 36 15 30 15H22.8C16.8 15 14.4 17.4 14.4 23.4V30.6C14.4 36.6 16.8 39 22.8 39Z" stroke="#FF7161" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M30.6 34.8C31.92 34.8 33 33.72 33 32.4V21.6C33 20.28 31.92 19.2 30.6 19.2C29.28 19.2 28.2 20.28 28.2 21.6V32.4C28.2 33.72 29.268 34.8 30.6 34.8Z" stroke="#FF7161" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M22.2 34.8C23.52 34.8 24.6 33.72 24.6 32.4V28.2C24.6 26.88 23.52 25.8 22.2 25.8C20.88 25.8 19.8 26.88 19.8 28.2V32.4C19.8 33.72 20.868 34.8 22.2 34.8Z" stroke="#FF7161" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             <h1 class="text-lg md:text-xl font-bold">Graphs</h1>
                             <h2 class="text-gray-600 text-sm md:text-base">Now you can view your spending visually!</h2>
@@ -92,8 +113,13 @@ import { Head } from '@inertiajs/vue3';
 
                         <div class="flex flex-col items-center md:items-start text-center md:text-left">
                             <svg width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="26.5" cy="26.5" r="26" stroke="#FF7161"/>
+                            <circle cx="26.5" cy="26.5" r="26" stroke="#FF7161"/>
+                            <path d="M18.648 25.3438C13.032 25.7398 13.032 33.9118 18.648 34.3078H20.952" stroke="#FF7161" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M18.708 25.3438C14.856 14.6278 31.104 10.3438 32.964 21.5998C38.16 22.2598 40.26 29.1838 36.324 32.6278C35.124 33.7198 33.576 34.3198 31.956 34.3078H31.848" stroke="#FF7161" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M32.4 31.8359C32.4 32.7239 32.208 33.5639 31.848 34.3079C31.752 34.5239 31.644 34.7279 31.524 34.9199C30.492 36.6599 28.584 37.8359 26.4 37.8359C24.216 37.8359 22.308 36.6599 21.276 34.9199C21.156 34.7279 21.048 34.5239 20.952 34.3079C20.592 33.5639 20.4 32.7239 20.4 31.8359C20.4 28.5239 23.088 25.8359 26.4 25.8359C29.712 25.8359 32.4 28.5239 32.4 31.8359Z" stroke="#FF7161" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M24.528 31.8362L25.716 33.0242L28.272 30.6602" stroke="#FF7161" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
+
                             <h1 class="text-lg md:text-xl font-bold">Save and Load</h1>
                             <h2 class="text-gray-600 text-sm md:text-base">Tired of re-entering your data?</h2>
                         </div>
