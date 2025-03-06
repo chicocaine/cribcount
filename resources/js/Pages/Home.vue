@@ -126,26 +126,60 @@ import { Head } from '@inertiajs/vue3';
                     </div>
 
                     <!-- Button -->
-                    <div class="pt-24 pb-6 md:pb-2 text-center flex-grow">
-                        <a 
-                            :href="route('mortgage.calculator')" 
-                            :class="{
-                                'bg-zinc-900 border-orange-600': route().current('mortgage.calculator'), 
-                                'bg-zinc-900 hover:bg-orange-800 border-orange-600': !route().current('mortgage.calculator')
-                            }"
-                            class="px-6 py-2 text-white border rounded-md hover:bg-zinc-850 hover:text-orange-700 transition dark:text-white shadow-md"
-                        >
+                    <div class="pt-24 md:pt-16 lg:pt-12 pb-6 md:pb-2 text-center flex-grow">
+                        <a href="http://localhost/cribcount/public/Mortgage-Calculator" 
+                        class="bg-zinc-900 hover:bg-orange-800 border-orange-600 px-6 py-2 text-white border rounded-md hover:bg-zinc-850 hover:text-orange-700 transition dark:text-white shadow-md">
                             Calculator →
                         </a>
                     </div>
                 </div>
             </div>
 
+            <!-- How It Works Section -->
+            <div class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white py-16 px-6 md:px-16">
+                <div class="max-w-7xl mx-auto text-center">
+                <h6 class="text-orange-600 text-lg md:text-xl">How It Works</h6>
+                <h1 class="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100">
+                    Easily calculate your mortgage payments in just a few steps.
+                </h1>
+            </div>
 
 
-            <!--How To Use-->
-            <div class="flex flex-col items-center justify-start text-center min-h-screen pt-24 bg-zinc-90 min-w-screen text-zinc-900 dark:text-zinc-100">
-                
+                <!-- Steps Container -->
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center text-center p-6 border border-gray-300 dark:border-gray-700 rounded-lg shadow-md">
+                        <svg class="w-12 h-12 text-orange-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                        </svg>
+                        <h3 class="text-xl font-semibold">Enter Mortgage Details</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-400">
+                            Provide the mortgage amount, loan term, interest rate, and down payment.
+                        </p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center text-center p-6 border border-gray-300 dark:border-gray-700 rounded-lg shadow-md">
+                        <svg class="w-12 h-12 text-orange-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.38 0-2.5 1.12-2.5 2.5S10.62 13 12 13s2.5-1.12 2.5-2.5S13.38 8 12 8z"/>
+                        </svg>
+                        <h3 class="text-xl font-semibold">Get Instant Calculations</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-400">
+                            See your monthly payment breakdown and total mortgage cost in real-time.
+                        </p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col items-center text-center p-6 border border-gray-300 dark:border-gray-700 rounded-lg shadow-md">
+                        <svg class="w-12 h-12 text-orange-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        <h3 class="text-xl font-semibold">Review Amortization Schedule</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-400">
+                            View a detailed breakdown of your loan payments over time.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </AuthenticatedLayout>
