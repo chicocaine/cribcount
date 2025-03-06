@@ -38,7 +38,26 @@ const showingNavigationDropdown = ref(false);
                                     Home
                                 </NavLink>
                             </div>
-                            
+                            <div
+                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                            >
+                                <NavLink
+                                    :href="route('mortgage.calculator')"
+                                    :active="route().current('mortgage.calculator')"
+                                >
+                                    Calculator
+                                </NavLink>
+                            </div>
+                            <div
+                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                            >
+                                <NavLink
+                                    :href="route('about')"
+                                    :active="route().current('about')"
+                                >
+                                    About
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div class="hidden sm:ms-6 sm:flex sm:items-center">

@@ -22,7 +22,21 @@ class StoreMortgageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'home_price' => 'required|numeric|min:0',
+            'down_payment' => 'required|numeric|min:0',
+            'loan_type' => 'required|in:fixed,arm',
+            'interest_rate' => 'required|decimal:0,2|between:0,99.99',
+            'loan_term' => 'required|integer|between:1,50',
+            'monthly_property_tax' => 'nullable|numeric|min:0',
+            'monthly_home_insurance' => 'nullable|numeric|min:0',
+            'monthly_hoa' => 'nullable|numeric|min:0',
+            
+            'adjustable.initial_term' => 'required_if:loan_type,arm|integer|min:1',
+            'adjustable.initial_rate' => 'required_if:loan_type,arm|decimal:0,2|between:0,99.99',
+            'adjustable.margin' => 'required_if:loan_type,arm|decimal:0,2|between:0,99.99',
+            'adjustable.periodic_cap' => 'required_if:loan_type,arm|decimal:0,2|between:0,99.99',
+            'adjustable.lifetime_cap' => 'required_if:loan_type,arm|decimal:0,2|between:0,99.99',
+            'adjustable.interest_only_period' => 'nullable|integer|min:0',
         ];
     }
 }
