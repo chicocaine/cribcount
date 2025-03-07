@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
@@ -34,7 +35,7 @@ import { Head } from '@inertiajs/vue3';
                             <!-- Button Container -->
                             <div class="flex flex-col sm:flex-row sm:justify-center sm:space-x-4 space-y-4 sm:space-y-0 mt-6">
                                 <!-- Primary Button (Calculator) -->
-                                <a 
+                                <Link 
                                     :href="route('mortgage.calculator')" 
                                     :class="{
                                         'bg-orange-600 dark:bg-orange-700 text-white': route().current('mortgage.calculator'), 
@@ -43,15 +44,17 @@ import { Head } from '@inertiajs/vue3';
                                     class="px-6 py-2 rounded-md shadow-md transition text-center sm:w-auto w-full border"
                                 >
                                     Calculator →
-                                </a>
+                                </Link>
 
                                 <!-- Secondary Button (How to Use) -->
-                                <a href="/how-to-use" 
-                                class="px-6 py-2 border rounded-md transition text-center sm:w-auto w-full 
+                                <Link
+                                    :href="route('about')" 
+                                    class="px-6 py-2 border rounded-md transition text-center sm:w-auto w-full 
                                         border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white 
-                                        dark:border-white dark:text-white dark:hover:bg-zinc-200 dark:hover:text-zinc-950">
+                                        dark:border-white dark:text-white dark:hover:bg-zinc-200 dark:hover:text-zinc-950"
+                                >
                                     TO DO
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -138,12 +141,13 @@ import { Head } from '@inertiajs/vue3';
 
                     <!-- Button -->
                     <div class="pt-24 md:pt-16 lg:pt-12 pb-6 md:pb-2 text-center flex-grow">
-                        <a href="http://localhost/cribcount/public/Mortgage-Calculator" 
+                        <Link 
+                            :href="route('mortgage.calculator')" 
                             class="bg-zinc-900 dark:bg-orange-600 hover:bg-zinc-700 dark:hover:bg-orange-500 
                                 border-zinc-900 hover:border-zinc-700 dark:border-orange-600 
                                 text-white px-6 py-2 rounded-md shadow-md transition border text-center sm:w-auto w-full">
                             Calculator →
-                        </a>  
+                    </Link>  
                     </div>
                 </div>
             </div>
