@@ -8,7 +8,7 @@ import { Link } from '@inertiajs/vue3';
     <Head title="Home" />
 
     <AuthenticatedLayout>
-        <div class=" SX1">
+        <div class="SX1">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 lg:pt-16">
                 <div
                     class="overflow-hidden "
