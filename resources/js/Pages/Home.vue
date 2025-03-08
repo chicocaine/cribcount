@@ -76,7 +76,7 @@ import { Link } from '@inertiajs/vue3';
 
                     <!-- Heading -->
                     <div class="pt-24">
-                        <h6 class="text-orange-600 dark:text-orange-400 text-lg md:text-xl">
+                        <h6 class="text-orange-600 dark:text-orange-600 text-lg md:text-xl">
                             Cribcount's Features
                         </h6>
                         <h1 class="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white">
@@ -192,6 +192,8 @@ import { Link } from '@inertiajs/vue3';
                     </div>
                 </div>
             </div>
+
+            <!-- Last Call to Action Section-->
         </div>
     </AuthenticatedLayout>
 </template>
