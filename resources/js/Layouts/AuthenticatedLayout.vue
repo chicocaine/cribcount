@@ -157,7 +157,7 @@ const showingNavigationDropdown = ref(false);
             </main>
             <!-- Footer Component -->
             <Footer class="w-full flex-shrink-0" />
-            
+            <ScrollToTop />
         </div>
     </div>
 </template>
