@@ -5,7 +5,7 @@ import { Head } from '@inertiajs/vue3';
 
 <template>
     <Head title="Home" />
-
+    <!-- TODO BEUTIFY THIS SHIT -->
     <AuthenticatedLayout>
         <div class=" SX1">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 lg:pt-16">
