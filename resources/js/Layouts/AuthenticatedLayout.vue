@@ -7,12 +7,15 @@ import NavLink from '@/Components/NavLink.vue';
 import ThemeToggle from '@/Components/ThemeToggle.vue';
 import Footer from '@/Components/Footer.vue';
 import { Link } from '@inertiajs/vue3';
+import ScrollToTop from '@/Components/ScrollToTop.vue';
 
 const showingNavigationDropdown = ref(false);
 </script>
 
+
+
 <template>
-    <div class="min-h-screen flex flex-col bg-zinc-white dark:bg-zinc-950">
+    <div class="min-h-screen flex flex-col bg-white dark:bg-zinc-950">
         <div>
             <!-- Navbar -->
             <nav class="bg-white dark:bg-zinc-950 w-full fixed left-0 z-50 shadow-md">
@@ -36,7 +39,7 @@ const showingNavigationDropdown = ref(false);
                                     Calculator
                                 </NavLink>
                                 <NavLink :href="route('how-to-use')" :active="route().current('how-to-use')">
-                                    How to use
+                                    About Us
                                 </NavLink>
                             </div>
                         </div>
@@ -127,9 +130,10 @@ const showingNavigationDropdown = ref(false);
 
             <!-- Page Heading -->
             <header class="bg-white shadow dark:bg-zinc-800" v-if="$slots.header">
-                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-5 md:px-6 lg:px-8 pt-24">
                     <slot name="header" />
                 </div>
+
             </header>
 
             <!-- Page Content -->
@@ -138,6 +142,7 @@ const showingNavigationDropdown = ref(false);
             </main>
             <!-- Footer Component -->
             <Footer class="w-full flex-shrink-0" />
+             <ScrollToTop />
         </div>
     </div>
 </template>

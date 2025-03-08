@@ -17,13 +17,14 @@ import { Link } from '@inertiajs/vue3';
     <Head title="Home" />
     <!-- TODO BEUTIFY THIS SHIT -->
     <AuthenticatedLayout>
-        <div class="SX1">
-            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 lg:pt-16">
+        <div>
+            <div class="mx-auto max-w-7xl pt-16">
                 <div
                     class="overflow-hidden "
                 >
-                    <div class="p-6 text-zinc-900 dark:text-zinc-100">
-                        <div class="flex flex-col items-center justify-start text-center min-h-40vh px-4 py-24 text-zinc-900 dark:text-zinc-100">
+                    <div class="pt-6 text-zinc-900 dark:text-zinc-100">
+                        
+                        <div class="flex flex-col items-center justify-start text-center min-h-40vh py-24 text-zinc-900 dark:text-zinc-100 min-w-screen">
 
                             <div class="flex items-center justify-start pb-4 gap-4">
                                 <div class="flex items-start">
@@ -69,7 +70,7 @@ import { Link } from '@inertiajs/vue3';
                                         -900 text-zinc-900 hover:bg-zinc-900 hover:text-white 
                                         dark:border-white dark:text-white dark:hover:bg-zinc-200 dark:hover:text-zinc-950"
                                 >
-                                    About
+                                    About Us
                                 </Link>
                             </div>
                         </div>
