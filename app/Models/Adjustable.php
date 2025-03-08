@@ -12,6 +12,7 @@ class Adjustable extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'mortgage_id',
         'initial_term',
         'initial_rate',
         'margin',

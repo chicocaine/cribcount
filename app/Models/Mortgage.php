@@ -12,6 +12,7 @@ class Mortgage extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'user_id',
         'home_price',
         'down_payment',
         'loan_type',

@@ -156,7 +156,12 @@
         :min="0"
       />
     </div>
-    <div class="space-x-2 border-t pt-2 flex">
+    <div v-if="!$page.props.auth.user" class="border-t pt-2">
+      <p class="text-sm text-zinc-500 dark:text-zinc-400">
+        Log in to save or load mortgage calculations.
+      </p>
+    </div>
+    <div v-if="$page.props.auth.user" class="space-x-2 border-t pt-2 flex">
       <PrimaryButton class="w-full">
         Save
       </PrimaryButton>
@@ -241,10 +246,10 @@ const formatDownPaymentPercent = () => {
 
 watch(() => form.loan_type, () => {
   if (form.loan_type === 'fixed') {
-    delete errors.initial_term;
-    delete errors.margin;
-    delete errors.periodic_cap;
-    delete errors.lifetime_cap;
+    delete props.errors.initial_term;
+    delete props.errors.margin;
+    delete props.errors.periodic_cap;
+    delete props.errors.lifetime_cap;
   }
 });
 
