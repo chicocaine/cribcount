@@ -28,7 +28,7 @@ const showingNavigationDropdown = ref(false);
                             </div>
 
                             <!-- Nav Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <div class="hidden sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink :href="route('home')" :active="route().current('home')">
                                     Home
                                 </NavLink>
@@ -36,17 +36,17 @@ const showingNavigationDropdown = ref(false);
                                     Calculator
                                 </NavLink>
                                 <NavLink :href="route('about')" :active="route().current('about')">
-                                    About
+                                    How to use
                                 </NavLink>
                             </div>
                         </div>
 
-                        <div class="hidden sm:ms-6 sm:flex sm:items-center">
-                            <div class="mr-4">
+                        <div class="hidden sm:ms-6 sm:flex">
+                            <div class="mr-4 self-center">
                                 <ThemeToggle />
                             </div>
                             <template v-if="$page.props.auth.user">
-                                <div class="relative ms-3">
+                                <div class="relative ms-3 self-center">
                                     <Dropdown align="right" width="48">
                                         <template #trigger>
                                             <span class="inline-flex rounded-md">
@@ -85,10 +85,16 @@ const showingNavigationDropdown = ref(false);
                             </template>
 
                             <template v-else>
-                                <div class="flex space-x-8">
-                                    <NavLink :href="route('login')"> Login </NavLink>
-                                    <NavLink :href="route('register')"> Register </NavLink>
+                                <div class="flex space-x-2">
+                                    <NavLink :href="route('login')" class="!border-none !bg-transparent text-zinc-500 dark:text-zinc-400 hover:text-orange-700 dark:hover:text-orange-500 focus:text-orange-700 dark:focus:text-orange-500 transition duration-150 ease-in-out">
+                                        Login
+                                    </NavLink>
+                                    <NavLink :href="route('register')" class="!border-none !bg-transparent text-zinc-500 dark:text-zinc-400 hover:text-orange-700 dark:hover:text-orange-500 focus:text-orange-700 dark:focus:text-orange-500 transition duration-150 ease-in-out">
+                                        Register
+                                    </NavLink>
                                 </div>
+
+
                             </template>
                         </div>
 
