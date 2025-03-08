@@ -96,7 +96,7 @@ watch(() => formData, calculateResults, { immediate: true });
   
   <AuthenticatedLayout>
     <div class="py-12">
-      <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 lg:pt-16">
+      <div class="mx-auto max-w-7xl sm:px-6 px-8 pt-16">
         <div class="overflow-hidden">
           <div class="flex">
             <div class="w-1/5 mx-1">
@@ -117,5 +117,5 @@ watch(() => formData, calculateResults, { immediate: true });
         </div>
       </div>
     </div>
-  </AuthenticatedLayout>
+  </AuthenticatedLayout>  
 </template>
