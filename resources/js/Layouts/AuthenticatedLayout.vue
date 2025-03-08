@@ -46,7 +46,7 @@ const showingNavigationDropdown = ref(false);
                             </div>
 
                             <template v-if="$page.props.auth.user">
-                                <div class="flex">
+                                <div class="relative">
                                     <!-- Dropdown Trigger -->
                                     <button
                                         @click="showDropdown = !showDropdown"
