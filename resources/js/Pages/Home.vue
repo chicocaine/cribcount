@@ -8,7 +8,7 @@ import { Link } from '@inertiajs/vue3';
     <Head title="Home" />
     <!-- TODO BEUTIFY THIS SHIT -->
     <AuthenticatedLayout>
-        <div class="">
+        <div class="SX1">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 lg:pt-16">
                 <div
                     class="overflow-hidden "
@@ -19,16 +19,23 @@ import { Link } from '@inertiajs/vue3';
                             <div class="flex items-center justify-start pb-4 gap-4">
                                 <div class="flex items-start">
                                     <div class="flex items-center">
-                                        <h1 class="text-[15vw] md:text-9xl font-bold text-orange-600 leading-none">C</h1>
+                                        <h1 class="text-[min(15vw,100px)] sm:text-7xl md:text-9xl font-bold text-orange-600 leading-none">
+                                            C
+                                        </h1>
                                         <div class="flex flex-col">
-                                            <h1 class="text-[6vw] sm:text-5xl md:text-6xl font-bold leading-tight">CRIB COUNT</h1>
-                                            <h1 class="text-[4vw] sm:text-3xl md:text-4xl italic leading-tight">MORTGAGE TRACKER</h1>
+                                            <h1 class="text-[min(6vw,40px)] sm:text-5xl md:text-6xl font-bold leading-tight">
+                                                CRIB COUNT
+                                            </h1>
+                                            <h1 class="text-[min(4vw,28px)] sm:text-3xl md:text-4xl italic leading-tight">
+                                                MORTGAGE TRACKER
+                                            </h1>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                             <hr class="border-t-2 border-gray-300 dark:border-gray-700 my-4 w-full max-w-4xl mx-auto pb-2">
-                            <h6 class="text-lg text-zinc-900 dark:text-zinc-100 text-center px-4">
+                            <h6 class="text-base sm:text-lg md:text-xl text-zinc-900 dark:text-zinc-100 text-center px-2 sm:px-4">
                                 Know when to pay, what to pay, and how much to pay.
                             </h6>
 
@@ -39,7 +46,7 @@ import { Link } from '@inertiajs/vue3';
                                     :href="route('mortgage.calculator')" 
                                     :class="{
                                         'bg-orange-600 dark:bg-orange-700 text-white': route().current('mortgage.calculator'), 
-                                        'bg-zinc-900 dark:bg-orange-600 hover:bg-zinc-700 dark:hover:bg-orange-500 border-zinc-900 hover:border-zinc-700 dark:border-orange-600 text-white': !route().current('mortgage.calculator')
+                                        'bg-orange-600 dark:bg-orange-600 hover:bg-orange-400 dark:hover:bg-orange-500 border-orange-600 hover:border-orange-400 dark:border-orange-600 text-white': !route().current('mortgage.calculator')
                                     }"
                                     class="px-6 py-2 rounded-md shadow-md transition text-center sm:w-auto w-full border"
                                 >
@@ -50,10 +57,10 @@ import { Link } from '@inertiajs/vue3';
                                 <Link
                                     :href="route('how-to-use')" 
                                     class="px-6 py-2 border rounded-md transition text-center sm:w-auto w-full 
-                                        border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white 
+                                        -900 text-zinc-900 hover:bg-zinc-900 hover:text-white 
                                         dark:border-white dark:text-white dark:hover:bg-zinc-200 dark:hover:text-zinc-950"
                                 >
-                                    TO DO
+                                    About
                                 </Link>
                             </div>
                         </div>
@@ -62,9 +69,9 @@ import { Link } from '@inertiajs/vue3';
             </div>
             
             <!-- Cards -->
-            <div class="flex flex-col items-center justify-start text-center min-h-[80vh] md:min-h-screen pt-24 pb-12 md:pb-6 bg-zinc-90 min-w-screen text-zinc-900 dark:text-zinc-100">
+            <div class="flex flex-col items-center justify-start text-center bg-zinc-90 min-w-screen text-zinc-900 dark:text-zinc-100">
 
-                <div class="bg-zinc-100 dark:bg-zinc-900 min-h-screen md:min-h-[80vh] w-full flex flex-col items-center flex-grow">
+                <div class="bg-zinc-100 dark:bg-zinc-900 w-full flex flex-col items-center flex-grow pb-24">
 
 
                     <!-- Heading -->
@@ -72,7 +79,7 @@ import { Link } from '@inertiajs/vue3';
                         <h6 class="text-orange-600 dark:text-orange-400 text-lg md:text-xl">
                             Cribcount's Features
                         </h6>
-                        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+                        <h1 class="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white">
                             We do more than calculations
                         </h1>
                     </div>
