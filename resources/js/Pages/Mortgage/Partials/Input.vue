@@ -5,6 +5,7 @@
       v-model.number="form.home_price"
       type="number"
       step="1000"
+      :min="0"
       :error="errors.home_price"
     />
 
@@ -19,6 +20,7 @@
       @focus:amount="isAmountFocused = true"
       @focus:percent="isPercentFocused = true"
       :error="errors.down_payment"
+      :min="0"
     />
 
     <SelectInput
@@ -36,6 +38,7 @@
       type="number"
       step="0.1"
       :error="errors.interest_rate"
+      :min="0"
     />
 
     <InputField
@@ -43,9 +46,10 @@
       v-model.number="form.loan_term"
       type="number"
       :error="errors.loan_term"
+      :min="0"
     />
 
-    <button @click="showAdditionalFields = !showAdditionalFields" class="pt-2 text-zinc-800 dark:text-zinc-200">
+    <button @click="showAdditionalFields = !showAdditionalFields" class="pt-2 text-zinc-800 dark:text-zinc-200 hover:text-orange-500 dark:hover:text-orange-500 transition ease-linear duration-150">
       {{ showAdditionalFields ? 'Hide' : 'Show' }} Additional Fields
     </button>
 
@@ -55,28 +59,34 @@
       </h3>
 
       <InputField
-      label="Monthly Property Tax ($)"
-      v-model.number="form.monthly_property_tax"
-      type="number"
-      step="100"
+        label="Monthly Property Tax ($)"
+        v-model.number="form.monthly_property_tax"
+        type="number"
+        step="100"
+        :min="0"
+        :error="errors.monthly_property_tax"
       />
       
       <InputField
-      label="Monthly Home Insurance ($)"
-      v-model.number="form.monthly_home_insurance"
-      type="number"
-      step="100"
+        label="Monthly Home Insurance ($)"
+        v-model.number="form.monthly_home_insurance"
+        type="number"
+        step="100"
+        :min="0"
+        :error="errors.monthly_home_insurance"
       />
       
       <InputField
-      label="Monthly HOA Fees ($)"
-      v-model.number="form.monthly_hoa"
-      type="number"
-      step="100"
+        label="Monthly HOA Fees ($)"
+        v-model.number="form.monthly_hoa"
+        type="number"
+        step="100"
+        :min="0"
+        :error="errors.monthly_hoa"
       />
     </div>
 
-    <div v-if="form.loan_type === 'adjustable'" class="space-y-4 border-t pt-4">
+    <div v-if="form.loan_type === 'adjustable'" class="space-y-4 border-t py-4">
       <h3 class="text-lg font-medium text-zinc-900 dark:text-zinc-100">
         Adjustable Rate Details
       </h3>
@@ -86,6 +96,7 @@
         v-model.number="form.initial_term"
         type="number"
         :error="errors.initial_term"
+        :min="0"
       />
       
       <InputField
@@ -94,6 +105,7 @@
         type="number"
         step="0.1"
         :error="errors.initial_rate"
+        :min="0"
       />
       
       <InputField
@@ -102,6 +114,7 @@
         type="number"
         step="0.1"
         :error="errors.margin"
+        :min="0"
       />
       
       <InputField
@@ -110,6 +123,7 @@
         type="number"
         step="0.1"
         :error="errors.periodic_cap"
+        :min="0"
       />
       
       <InputField
@@ -118,6 +132,7 @@
         type="number"
         step="0.1"
         :error="errors.lifetime_cap"
+        :min="0"
       />
       
       <InputField
@@ -125,7 +140,16 @@
         v-model.number="form.interest_only_period"
         type="number"
         :error="errors.interest_only_period"
+        :min="0"
       />
+    </div>
+    <div class="space-x-2 border-t pt-2 flex">
+      <PrimaryButton class="w-full">
+        Save
+      </PrimaryButton>
+      <SecondaryButton class="w-full">
+        Load
+      </SecondaryButton>
     </div>
   </div>
 </template>
@@ -135,6 +159,8 @@ import { reactive, watch, ref } from 'vue';
 import InputField from '@/Components/InputField.vue';
 import SelectInput from '@/Components/SelectInput.vue';
 import InputGroup from '@/Components/InputGroup.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 
 const emit = defineEmits(['update', 'validation']);
 const props = defineProps({ errors: Object });
@@ -165,22 +191,22 @@ const showAdditionalFields = ref(false);
 
 watch(() => [form.home_price, form.down_payment], ([price, amount]) => {
   if (!isAmountFocused.value) {
-    downPaymentAmountRaw.value = amount.toFixed(2);
+    downPaymentAmountRaw.value = amount.toFixed(0);
   }
   if (!isPercentFocused.value) {
-    downPaymentPercentRaw.value = ((amount / price) * 100).toFixed(2);
+    downPaymentPercentRaw.value = ((amount / price) * 100).toFixed(0);
   }
 });
 
 const updateDownPaymentAmount = (rawValue) => {
   downPaymentAmountRaw.value = rawValue;
-  const amount = parseFloat(rawValue) || 0;
+  const amount = Math.max(parseFloat(rawValue) || 0, 0);
   form.down_payment = Math.min(amount, form.home_price);
 };
 
 const updateDownPaymentPercent = (rawValue) => {
   downPaymentPercentRaw.value = rawValue;
-  const percent = parseFloat(rawValue) || 0;
+  const percent = Math.max(parseFloat(rawValue) || 0, 0);
   const amount = (percent / 100) * form.home_price;
   form.down_payment = Math.min(amount, form.home_price);
 };
@@ -200,14 +226,26 @@ const formatDownPaymentPercent = () => {
   form.down_payment = Math.min(amount, form.home_price);
 };
 
+watch(() => form.loan_type, () => {
+  if (form.loan_type === 'fixed') {
+    delete errors.initial_term;
+    delete errors.margin;
+    delete errors.periodic_cap;
+    delete errors.lifetime_cap;
+  }
+});
+
 // Validation rules
 const validate = () => {
   const errors = {};
-   
-  Object.keys(form).forEach(key => delete errors[key]);
 
-  if (form.home_price <= 0 || isNaN(form.home_price)) errors.home_price = 'Must be a positive value';
-  if (form.down_payment < 0 || form.down_payment > form.home_price) errors.down_payment = 'Cannot be negative';
+  if (form.home_price <= 0 || isNaN(form.home_price)) {
+    errors.home_price = 'Must be a positive value';
+  } 
+  if (form.down_payment < 0 || form.down_payment > form.home_price) {
+    errors.down_payment = 'Invalid down payment';
+  }
+
   if (downPaymentPercentRaw.value !== null) {
     if (downPaymentPercentRaw.value < 0 || downPaymentPercentRaw.value > 100) {
       errors.down_payment = 'Percentage must be between 0-100';
@@ -233,14 +271,15 @@ const validate = () => {
     }
   }
 
-  watch(() => form.loan_type, () => {
-    if (form.loan_type === 'fixed') {
-      delete errors.initial_term;
-      delete errors.margin;
-      delete errors.periodic_cap;
-      delete errors.lifetime_cap;
-    }
-  });
+  if (form.monthly_property_tax < 0) {
+    errors.monthly_property_tax = 'Cannot be negative';
+  }
+  if (form.monthly_home_insurance < 0) {
+    errors.monthly_home_insurance = 'Cannot be negative';
+  }
+  if (form.monthly_hoa < 0) {
+    errors.monthly_hoa = 'Cannot be negative';
+  }
 
   emit('validation', errors);
   return errors;

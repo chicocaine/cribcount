@@ -15,6 +15,7 @@
           'block w-full rounded-md border-zinc-300 shadow-sm focus:border-red-500 focus:ring-red-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:focus:border-red-600 dark:focus:ring-red-600',
           { 'input-error': error }
         ]"
+        :min="min"
       />
     </slot>
 
@@ -23,6 +24,8 @@
 </template>
 
 <script setup>
+import ValidationError from './ValidationError.vue';
+
 defineProps({
   label: String,
   modelValue: [String, Number],
@@ -32,7 +35,8 @@ defineProps({
   },
   step: [String, Number],
   placeholder: String,
-  error: String
+  error: String,
+  min: Number
 });
 
 defineEmits(['update:modelValue']);

@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-4xl mx-auto p-4">
-    <!-- Monthly Payment Breakdown Card -->
+
     <div class="bg-zinc-100 dark:bg-zinc-800 shadow rounded-lg p-6 mb-6">
       <h3 class="text-2xl font-semibold mb-4 text-zinc-800 dark:text-zinc-200">
         Monthly Payment Breakdown
@@ -31,7 +31,6 @@
       </div>
     </div>
 
-    <!-- Total Costs Card -->
     <div class="bg-zinc-100 dark:bg-zinc-800 shadow rounded-lg p-6 mb-6">
       <h3 class="text-2xl font-semibold mb-4 text-zinc-800 dark:text-zinc-200">
         Total Costs
@@ -52,13 +51,13 @@
       </div>
     </div>
 
-    <!-- ApexCharts Donut Chart Card -->
-    <div class="bg-zinc-100 dark:bg-zinc-800 shadow rounded-lg p-6">
+    <div class="bg-zinc-100 dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col items-center">
       <h3 class="text-2xl font-semibold mb-4 text-zinc-800 dark:text-zinc-200">
         Payment Breakdown Chart
       </h3>
       <apexchart
         type="donut"
+        width="500"
         :options="chartOptions"
         :series="chartSeries"
       />
@@ -80,9 +79,11 @@ const chartSeries = computed(() => [
   props.results.monthly_hoa
 ]);
 
-const isDarkMode = ref(document.documentElement.classList.contains('dark'));
+const isDarkMode = ref(false);
 
 onMounted(() => {
+  isDarkMode.value = document.documentElement.classList.contains('dark');
+  
   const observer = new MutationObserver(() => {
     isDarkMode.value = document.documentElement.classList.contains('dark');
   });
@@ -95,13 +96,13 @@ onMounted(() => {
 const chartOptions = computed(() => ({
   chart: {
     type: 'donut',
+    background: isDarkMode.value ? '#27272A' : '#F4F4F5',
+    height: 500,
+    width: 500,
     animations: {
       enabled: true,
       easing: 'linear'
     }
-  },
-  theme: {
-    mode: isDarkMode.value ? 'dark' : 'light'
   },
   labels: [
     'Principal & Interest',
@@ -109,15 +110,24 @@ const chartOptions = computed(() => ({
     'Home Insurance',
     'HOA Fees'
   ],
-  // Custom colors to ensure proper contrast in each mode
   colors: isDarkMode.value
     ? ['#A78BFA', '#6EE7B7', '#FBBF24', '#F87171']
     : ['#4F46E5', '#10B981', '#F59E0B', '#EF4444'],
+  legend: {
+    labels: {
+      colors: isDarkMode.value ? '#f8fafc' : '#1a202c'
+    }
+  },
+  dataLabels: {
+    style: {
+      colors: [isDarkMode.value ? '#f8fafc' : '#1a202c']
+    }
+  },
   responsive: [{
-    breakpoint: 100,
+    breakpoint: 480,
     options: {
       chart: {
-        width: 100
+        width: 500
       },
       legend: {
         position: 'bottom'
