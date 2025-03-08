@@ -5,7 +5,7 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ThemeToggle from '@/Components/ThemeToggle.vue';
-import Footer from '@/Components/footer.vue';
+import Footer from '@/Components/Footer.vue';
 import { Link } from '@inertiajs/vue3';
 
 const showingNavigationDropdown = ref(false);
@@ -35,7 +35,7 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('mortgage.calculator')" :active="route().current('mortgage.calculator')">
                                     Calculator
                                 </NavLink>
-                                <NavLink :href="route('about')" :active="route().current('about')">
+                                <NavLink :href="route('how-to-use')" :active="route().current('how-to-use')">
                                     How to use
                                 </NavLink>
                             </div>
@@ -52,7 +52,7 @@ const showingNavigationDropdown = ref(false);
                                             <span class="inline-flex rounded-md">
                                                 <button
                                                     type="button"
-                                                    class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-zinc-500 transition duration-150 ease-in-out hover:text-zinc-700 focus:outline-none dark:bg-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-300"
+                                                    class="inline-flex items-center rounded-md border border-transparent bg-white dark:bg-zinc-950 px-3 py-2 text-sm font-medium leading-4 text-zinc-500 transition duration-150 ease-in-out hover:text-zinc-700 focus:outline-none dark:text-zinc-400 dark:hover:text-zinc-300"
                                                 >
                                                     {{ $page.props.auth.user.name }}
 

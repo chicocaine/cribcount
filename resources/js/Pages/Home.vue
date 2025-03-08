@@ -8,7 +8,7 @@ import { Link } from '@inertiajs/vue3';
     <Head title="Home" />
     <!-- TODO BEUTIFY THIS SHIT -->
     <AuthenticatedLayout>
-        <div class="SX1">
+        <div class="">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 lg:pt-16">
                 <div
                     class="overflow-hidden "
@@ -48,7 +48,7 @@ import { Link } from '@inertiajs/vue3';
 
                                 <!-- Secondary Button (How to Use) -->
                                 <Link
-                                    :href="route('about')" 
+                                    :href="route('how-to-use')" 
                                     class="px-6 py-2 border rounded-md transition text-center sm:w-auto w-full 
                                         border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white 
                                         dark:border-white dark:text-white dark:hover:bg-zinc-200 dark:hover:text-zinc-950"
