@@ -28,19 +28,21 @@ import { Link } from '@inertiajs/vue3';
 
                             <div class="flex items-center justify-start pb-4 gap-4">
                                 <div class="flex items-start">
-                                    <div class="flex items-center">
-                                        <h1 class="text-[min(15vw,100px)] sm:text-7xl md:text-9xl font-bold text-orange-600 leading-none">
+                                    <div class="flex items-center space-x-2 sm:space-x-4 md:space-x-6 flex-nowrap">
+                                        <h1 class="text-6xl sm:text-7xl md:text-9xl font-bold text-orange-600 leading-none">
                                             C
                                         </h1>
-                                        <div class="flex flex-col">
-                                            <h1 class="text-[min(6vw,40px)] sm:text-5xl md:text-6xl font-bold leading-tight">
+                                        <div class="flex flex-col text-left">
+                                            <h1 class="text-2xl sm:text-5xl md:text-6xl font-bold leading-tight">
                                                 CRIB COUNT
                                             </h1>
-                                            <h1 class="text-[min(4vw,28px)] sm:text-3xl md:text-4xl italic leading-tight">
+                                            <h1 class="text-xl sm:text-3xl md:text-4xl italic leading-tight">
                                                 MORTGAGE TRACKER
                                             </h1>
                                         </div>
                                     </div>
+
+
 
                                 </div>
                             </div>
