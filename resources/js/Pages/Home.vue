@@ -138,17 +138,6 @@ import { Link } from '@inertiajs/vue3';
                             <h2 class="text-gray-600 text-sm md:text-base">Tired of re-entering your data?</h2>
                         </div>
                     </div>
-
-                    <!-- Button -->
-                    <div class="pt-24 md:pt-16 lg:pt-12 pb-6 md:pb-2 text-center flex-grow">
-                        <Link 
-                            :href="route('mortgage.calculator')" 
-                            class="bg-zinc-900 dark:bg-orange-600 hover:bg-zinc-700 dark:hover:bg-orange-500 
-                                border-zinc-900 hover:border-zinc-700 dark:border-orange-600 
-                                text-white px-6 py-2 rounded-md shadow-md transition border text-center sm:w-auto w-full">
-                            Calculator →
-                    </Link>  
-                    </div>
                 </div>
             </div>
 
