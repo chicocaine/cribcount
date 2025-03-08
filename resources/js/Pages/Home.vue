@@ -192,8 +192,23 @@ import { Link } from '@inertiajs/vue3';
                     </div>
                 </div>
             </div>
-
+            
             <!-- Last Call to Action Section-->
+             <div class="flex flex-col items-center text-center bg-zinc-100 dark:bg-zinc-950 py-16 px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white">
+                    Ready to Take Control of Your Mortgage?
+                </h2>
+                <p class="text-zinc-600 dark:text-zinc-300 mt-4 max-w-2xl">
+                    Get a clear breakdown of your payments and stay ahead of your finances. Start calculating now and make informed decisions with confidence!
+                </p>
+                <a 
+                    :href="route('mortgage.calculator')"  
+                    class="px-6 py-1.5 mt-6 bg-orange-600 hover:bg-orange-500 text-white text-lg rounded-md shadow-md transition duration-150 ease-in-out"
+                >
+                    Calculate Now →
+                </a>
+            </div>
+
         </div>
     </AuthenticatedLayout>
 </template>
