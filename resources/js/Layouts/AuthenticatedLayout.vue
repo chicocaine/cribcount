@@ -12,8 +12,8 @@ const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
-    <div>
-        <div class="min-h-screen flex flex-col bg-zinc-white dark:bg-zinc-950 overflow-hidden">
+    <div class="min-h-screen flex flex-col bg-zinc-white dark:bg-zinc-950">
+        <div>
             <!-- Navbar -->
             <nav class="bg-white dark:bg-zinc-950 w-full fixed left-0 z-50 shadow-md">
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -133,12 +133,11 @@ const showingNavigationDropdown = ref(false);
             </header>
 
             <!-- Page Content -->
-            <main class="flex-grow overflow-y-auto">
+            <main class="flex-1">
                 <slot />
             </main>
-
             <!-- Footer Component -->
-             <Footer class="w-full flex:shrink-0" />
+            <Footer class="w-full flex-shrink-0" />
         </div>
     </div>
 </template>
