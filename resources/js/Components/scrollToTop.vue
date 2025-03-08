@@ -4,7 +4,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const isVisible = ref(false);
 
 const checkScroll = () => {
-    isVisible.value = window.scrollY > 200; // Show button after scrolling 200px
+    isVisible.value = window.scrollY > 200; 
 };
 
 const scrollToTop = () => {
