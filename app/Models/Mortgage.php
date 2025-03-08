@@ -13,6 +13,7 @@ class Mortgage extends Model
 
     protected $fillable = [
         'user_id',
+        'slot',
         'home_price',
         'down_payment',
         'loan_type',

@@ -162,14 +162,48 @@
       </p>
     </div>
     <div v-if="$page.props.auth.user" class="space-x-2 border-t pt-2 flex">
-      <PrimaryButton class="w-full">
+      <PrimaryButton @click="showSaveModal = true" class="w-full">
         Save
       </PrimaryButton>
-      <SecondaryButton class="w-full">
+      <SecondaryButton @click="showLoadModal = true" class="w-full">
         Load
       </SecondaryButton>
     </div>
   </div>
+  <Modal :show="showSaveModal" @close="showSaveModal = false">
+      <div class="p-6">
+          <h2 class="text-lg font-medium mb-4">Save to Slot</h2>
+          <div class="space-y-3">
+              <div v-for="slot in [1,2,3]" :key="slot" 
+                    @click="saveToSlot(slot)"
+                    class="p-4 border rounded cursor-pointer hover:bg-gray-100">
+                  <div>Slot {{ slot }}</div>
+                  <div v-if="getSlotMortgage(slot)" class="text-sm text-gray-600">
+                        Saved: {{ new Date(getSlotMortgage(slot).created_at).toLocaleString() }}
+                  </div>
+                  <div v-else class="text-sm text-gray-600">Empty</div>
+              </div>
+          </div>
+      </div>
+  </Modal>
+
+  <Modal :show="showLoadModal" @close="showLoadModal = false">
+      <div class="p-6">
+          <h2 class="text-lg font-medium mb-4">Load from Slot</h2>
+          <div class="space-y-3">
+              <div v-for="slot in [1,2,3]" :key="slot" 
+                    @click="loadFromSlot(slot)"
+                    :class="{'opacity-50': !getSlotMortgage(slot)}"
+                    class="p-4 border rounded cursor-pointer hover:bg-gray-100">
+                  <div>Slot {{ slot }}</div>
+                  <div v-if="getSlotMortgage(slot)" class="text-sm text-gray-600">
+                      Saved: {{ new Date(getSlotMortgage(slot).created_at).toLocaleString() }}
+                  </div>
+                  <div v-else class="text-sm text-gray-600">Empty</div>
+              </div>
+          </div>
+      </div>
+  </Modal>
 </template>
 
 <script setup>
@@ -179,9 +213,17 @@ import SelectInput from '@/Components/SelectInput.vue';
 import InputGroup from '@/Components/InputGroup.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import { router } from '@inertiajs/vue3';
+import Modal from '@/Components/Modal.vue';
 
 const emit = defineEmits(['update', 'validation']);
-const props = defineProps({ errors: Object });
+const props = defineProps({ 
+  errors: Object,
+  mortgages: {
+    type: Object,
+    default: () => [],
+  } 
+});
 
 const form = reactive({
   home_price: 100000,
@@ -231,14 +273,14 @@ const updateDownPaymentPercent = (rawValue) => {
 
 const formatDownPaymentAmount = () => {
   isAmountFocused.value = false;
-  const formatted = parseFloat(downPaymentAmountRaw.value || 0).toFixed(2);
+  const formatted = parseFloat(downPaymentAmountRaw.value || 0);
   downPaymentAmountRaw.value = formatted;
   form.down_payment = parseFloat(formatted);
 };
 
 const formatDownPaymentPercent = () => {
   isPercentFocused.value = false;
-  const formatted = parseFloat(downPaymentPercentRaw.value || 0).toFixed(2);
+  const formatted = parseFloat(downPaymentPercentRaw.value || 0);
   downPaymentPercentRaw.value = formatted;
   const amount = (parseFloat(formatted) / 100) * form.home_price;
   form.down_payment = Math.min(amount, form.home_price);
@@ -309,5 +351,41 @@ watch(form, (values) => {
   emit('update', { ...values, isValid: Object.keys(errors).length === 0 });
   emit('validation', errors);
 }, { deep: true, immediate: true });
+
+// Load and Saving
+
+const showSaveModal = ref(false);
+const showLoadModal = ref(false);
+
+const getSlotMortgage = (slot) => 
+    props.mortgages.find(m => m.slot === slot);
+
+const saveToSlot = async (slot) => {
+    if (Object.keys(validate()).length > 0) return;
+    
+    router.post(route('mortgage.save', { slot }), form, {
+        preserveScroll: true,
+        onSuccess: () => router.reload()
+    });
+};
+
+const loadFromSlot = (slot) => {
+    const mortgage = getSlotMortgage(slot);
+    if (!mortgage) return;
+
+    const adjustable = mortgage.adjustables?.[0] || {};
+    
+    Object.assign(form, {
+        ...mortgage,
+        initial_term: adjustable.initial_term,
+        initial_rate: adjustable.initial_rate,
+        margin: adjustable.margin,
+        periodic_cap: adjustable.periodic_cap,
+        lifetime_cap: adjustable.lifetime_cap,
+        interest_only_period: adjustable.interest_only_period
+    });
+    
+    showLoadModal.value = false;
+};
 
 </script>

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Adjustable extends Model
 {
     /** @use HasFactory<\Database\Factories\AdjustableFactory> */
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'mortgage_id',

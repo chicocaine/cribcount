@@ -137,20 +137,20 @@ import { Link } from '@inertiajs/vue3';
                     <HowItWorksCard 
                         :logo="DetailsLogo" 
                         title="Enter Mortgage Details" 
-                        description="Provide the mortgage amount, loan term, interest rate, and down payment."
+                        subtitle="Provide the mortgage amount, loan term, interest rate, and down payment."
                     />
                     <!-- Step 2 -->
                     <HowItWorksCard 
                         :logo="DotLogo" 
                         title="Get Instant Calculations" 
-                        description="See your monthly payment breakdown and total mortgage cost in real-time."
+                        subtitle="See your monthly payment breakdown and total mortgage cost in real-time."
                     />
 
                     <!-- Step 3 -->
                     <HowItWorksCard 
                         :logo="CheckLogo" 
                         title="Review Amortization Schedule" 
-                        description="View a detailed breakdown of your loan payments over time."
+                        subtitle="View a detailed breakdown of your loan payments over time."
                     />
                 </div>
             </div>
