@@ -36,7 +36,7 @@ import { Head } from '@inertiajs/vue3';
                         <div class="bg-white dark:bg-zinc-800 shadow-lg rounded-2xl p-6 text-center w-80">
                             <img src="http://localhost/cribcount/public/images/Ed.jpg" alt="Team Member" class="w-24 h-24 mx-auto rounded-full shadow-md">
                             <h3 class="mt-4 text-xl font-semibold text-zinc-900 dark:text-zinc-100">Eduard Anthony Pechayco</h3>
-                            <p class="text-orange-600 font-medium">Lead Programmer</p>
+                            <p class="text-orange-600 font-medium">Least Overwork Programmer</p>
                             <div class="flex justify-center gap-3 mt-4">
                             <a href="#" class="text-zinc-600 hover:text-red-600"><i class="fab fa-facebook"></i></a>
                             <a href="#" class="text-zinc-600 hover:text-red-600"><i class="fab fa-twitter"></i></a>
@@ -48,7 +48,7 @@ import { Head } from '@inertiajs/vue3';
                         <div class="bg-white dark:bg-zinc-800 shadow-lg rounded-2xl p-6 text-center w-80">
                             <img src="http://localhost/cribcount/public/images/Rob.jpg" alt="Team Member" class="w-24 h-24 mx-auto rounded-full shadow-md">
                             <h3 class="mt-4 text-xl font-semibold text-zinc-900 dark:text-zinc-100">Robroi Neo Dingal</h3>
-                            <p class="text-orange-600 font-medium">UI/UX</p>
+                            <p class="text-orange-600 font-medium">UI/UX design</p>
                             <div class="flex justify-center gap-3 mt-4">
                             <a href="#" class="text-zinc-600 hover:text-red-600"><i class="fab fa-facebook"></i></a>
                             <a href="#" class="text-zinc-600 hover:text-red-600"><i class="fab fa-twitter"></i></a>

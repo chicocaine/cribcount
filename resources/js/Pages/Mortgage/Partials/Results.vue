@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <div class="bg-gray-50 dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col items-center">
+    <div class="bg-gray-50 dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col items-center overflow-hidden">
       <h3 class="text-2xl font-semibold mb-4 text-zinc-800 dark:text-zinc-200">
         Payment Breakdown Chart
       </h3>
