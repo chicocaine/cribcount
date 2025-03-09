@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-4xl mx-auto p-4">
 
-    <div class="bg-zinc-100 dark:bg-zinc-800 shadow rounded-lg p-6 mb-6">
+    <div class="bg-gray-50 dark:bg-zinc-800 shadow rounded-lg p-6 mb-6">
       <h3 class="text-2xl font-semibold mb-4 text-zinc-800 dark:text-zinc-200">
         Monthly Payment Breakdown
       </h3>
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div class="bg-zinc-100 dark:bg-zinc-800 shadow rounded-lg p-6 mb-6">
+    <div class="bg-gray-50 dark:bg-zinc-800 shadow rounded-lg p-6 mb-6">
       <h3 class="text-2xl font-semibold mb-4 text-zinc-800 dark:text-zinc-200">
         Total Costs
       </h3>
@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <div class="bg-zinc-100 dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col items-center">
+    <div class="bg-gray-50 dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col items-center">
       <h3 class="text-2xl font-semibold mb-4 text-zinc-800 dark:text-zinc-200">
         Payment Breakdown Chart
       </h3>
@@ -96,7 +96,7 @@ onMounted(() => {
 const chartOptions = computed(() => ({
   chart: {
     type: 'donut',
-    background: isDarkMode.value ? '#27272A' : '#F4F4F5',
+    background: isDarkMode.value ? '#27272A' : '#F9FAFB',
     height: 500,
     width: 500,
     animations: {

@@ -83,7 +83,7 @@ import { Link } from '@inertiajs/vue3';
             <!-- Cards -->
             <div class="flex flex-col items-center justify-start text-center bg-zinc-90 min-w-screen text-zinc-900 dark:text-zinc-100">
 
-                <div class="bg-zinc-100 dark:bg-zinc-900 w-full flex flex-col items-center flex-grow pb-24">
+                <div class="bg-gray-50 dark:bg-zinc-900 w-full flex flex-col items-center flex-grow pb-24">
 
 
                     <!-- Heading -->
@@ -159,7 +159,7 @@ import { Link } from '@inertiajs/vue3';
             </div>
             
             <!-- Last Call to Action Section-->
-             <div class="flex flex-col items-center text-center bg-zinc-100 dark:bg-zinc-950 py-16 px-6">
+             <div class="flex flex-col items-center text-center bg-gray-50 dark:bg-zinc-950 py-16 px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white">
                     Ready to Take Control of Your Mortgage?
                 </h2>
