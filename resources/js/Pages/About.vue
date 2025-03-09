@@ -11,7 +11,7 @@ import { Head } from '@inertiajs/vue3';
 
             <section class="relative w-full h-64 pt-8">
                 <!-- Background Image -->
-                <img src="resources/images/AboutUs.jpg" alt="About Us" class="absolute inset-0 w-full h-full object-cover">
+                <img src="http://localhost/cribcount/public/images/AboutUs.jpg" alt="About Us" class="absolute inset-0 w-full h-full object-cover">
                 
                 <!-- Overlay -->
                 <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -34,7 +34,7 @@ import { Head } from '@inertiajs/vue3';
                     <div class="mt-10 flex flex-wrap justify-center gap-6">
                     <!-- Team Member 1 -->
                         <div class="bg-white dark:bg-zinc-800 shadow-lg rounded-2xl p-6 text-center w-80">
-                            <img src="resources/images/Ed.jpg" alt="Team Member" class="w-24 h-24 mx-auto rounded-full shadow-md">
+                            <img src="http://localhost/cribcount/public/images/Ed.jpg" alt="Team Member" class="w-24 h-24 mx-auto rounded-full shadow-md">
                             <h3 class="mt-4 text-xl font-semibold text-zinc-900 dark:text-zinc-100">Eduard Anthony Pechayco</h3>
                             <p class="text-orange-600 font-medium">Lead Programmer</p>
                             <div class="flex justify-center gap-3 mt-4">
@@ -46,7 +46,7 @@ import { Head } from '@inertiajs/vue3';
 
                         <!-- Team Member 2 -->
                         <div class="bg-white dark:bg-zinc-800 shadow-lg rounded-2xl p-6 text-center w-80">
-                            <img src="https://via.placeholder.com/150" alt="Team Member" class="w-24 h-24 mx-auto rounded-full shadow-md">
+                            <img src="http://localhost/cribcount/public/images/Rob.jpg" alt="Team Member" class="w-24 h-24 mx-auto rounded-full shadow-md">
                             <h3 class="mt-4 text-xl font-semibold text-zinc-900 dark:text-zinc-100">Robroi Neo Dingal</h3>
                             <p class="text-orange-600 font-medium">UI/UX</p>
                             <div class="flex justify-center gap-3 mt-4">
