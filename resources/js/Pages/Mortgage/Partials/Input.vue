@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-2">
+  <div class="space-y-2 p-4 lg:p-0">
     <InputField
       label="Home Price ($)"
       v-model.number="form.home_price"

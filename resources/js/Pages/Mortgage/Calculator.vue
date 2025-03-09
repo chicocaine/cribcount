@@ -96,26 +96,36 @@ watch(() => formData, calculateResults, { immediate: true });
   
   <AuthenticatedLayout>
     <div class="py-12">
-      <div class="mx-auto max-w-7xl sm:px-6 px-8 pt-16">
-        <div class="overflow-hidden">
-          <div class="flex">
-            <div class="w-1/5 mx-1">
-              <InputPartial 
-                @update="handleInputUpdate"
-                @validation="handleValidation"
-                :errors="validationErrors"
-                :mortgages="mortgages"
-              />
-            </div>
-            <div class="w-4/5">
-              <ResultsPartial :results="results" />
-            </div>
-          </div>
-          <div class="flex justify-center">
-            <AmortizationPartial :schedule="amortizationSchedule" />
-          </div>
+  <div class="mx-auto max-w-7xl sm:px-6 px-8 pt-16">
+    <div class="overflow-hidden">
+      
+      <!-- Responsive Layout -->
+      <div class="flex flex-col md:flex-row">
+        <!-- InputPartial: Full width on sm & md, 1/5 width on lg+ -->
+        <div class="w-full md:w-2/5 lg:w-1/5 mx-1">
+          <InputPartial 
+            @update="handleInputUpdate"
+            @validation="handleValidation"
+            :errors="validationErrors"
+            :mortgages="mortgages"
+          />
+        </div>
+        
+        <!-- ResultsPartial: Full width on sm & md, 4/5 width on lg+ -->
+        <div class="w-full md:w-3/5 lg:w-4/5">
+          <ResultsPartial :results="results" />
         </div>
       </div>
+
+      <!-- AmortizationPartial: Centered, full width -->
+      <div class="flex justify-center">
+        <AmortizationPartial :schedule="amortizationSchedule" />
+      </div>
+      
     </div>
+  </div>
+</div>
+
+
   </AuthenticatedLayout>  
 </template>

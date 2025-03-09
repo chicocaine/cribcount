@@ -123,16 +123,67 @@ const chartOptions = computed(() => ({
       colors: [isDarkMode.value ? '#f8fafc' : '#1a202c']
     }
   },
-  responsive: [{
-    breakpoint: 480,
+  responsive: [
+  {
+    breakpoint: 1280, // lg (Large screens: Laptops)
     options: {
       chart: {
-        width: 500
+        width: 500,
+        height: 500
+      },
+      legend: {
+        position: 'right'
+      }
+    }
+  },
+  {
+    breakpoint: 1024, // md (Medium screens: Tablets and small desktops)
+    options: {
+      chart: {
+        width: 450,
+        height: 450
+      },
+      legend: {
+        position: 'right'
+      }
+    }
+  },
+  {
+    breakpoint: 768, // sm (Small screens: Mobile landscape)
+    options: {
+      chart: {
+        width: 350,
+        height: 350
       },
       legend: {
         position: 'bottom'
       }
     }
-  }]
+  },
+  {
+    breakpoint: 640, // xs+ (Extra small landscape)
+    options: {
+      chart: {
+        width: 320,
+        height: 320
+      },
+      legend: {
+        position: 'bottom'
+      }
+    }
+  },
+  {
+    breakpoint: 480, // xs (Mobile)
+    options: {
+      chart: {
+        width: 280,
+        height: 280
+      },
+      legend: {
+        position: 'bottom'
+      }
+    }
+  }
+]
 }));
 </script>
