@@ -49,22 +49,12 @@
       :min="0"
     />
 
-    <button @click="showAdditionalFields = !showAdditionalFields" class="pt-2 text-zinc-800 dark:text-zinc-200 hover:text-orange-500 dark:hover:text-orange-500 transition ease-linear duration-150 flex">
+    <DropToggleButton 
+      @click="showAdditionalFields = !showAdditionalFields" 
+      :rotate="showAdditionalFields"
+    >
       {{ showAdditionalFields ? 'Hide' : 'Show' }} Additional Fields
-      <svg
-        :class="{'transform rotate-180': showAdditionalFields, 'transform rotate-0': !showAdditionalFields}"
-        class="h-4 w-4 flex items-center align-middle justify-center mt-1 ms-1 transition-transform duration-200"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path
-        fill-rule="evenodd"
-        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-        clip-rule="evenodd"
-        />
-      </svg>
-    </button>
+    </DropToggleButton>
 
     <div v-if="showAdditionalFields" class="space-y-4 border-t pt-2">
       <h3 class="text-lg font-medium text-zinc-900 dark:text-zinc-100">
@@ -162,26 +152,63 @@
       </p>
     </div>
     <div v-if="$page.props.auth.user" class="space-x-2 border-t pt-2 flex">
-      <PrimaryButton class="w-full">
+      <PrimaryButton @click="showSaveModal = true" class="w-full">
         Save
       </PrimaryButton>
-      <SecondaryButton class="w-full">
+      <SecondaryButton @click="showLoadModal = true" class="w-full">
         Load
       </SecondaryButton>
     </div>
   </div>
+
+  <SlotModal
+    :show="showSaveModal"
+    @close="showSaveModal = false"
+    title="Save to Slot"
+    :slots="saveSlots"
+    :dim-empty="false"
+    @select="saveToSlot"
+  />
+
+  <SlotModal
+    :show="showLoadModal"
+    @close="showLoadModal = false"
+    title="Load from Slot"
+    :slots="loadSlots"
+    :dim-empty="true"
+    @select="loadFromSlot"
+  />
+  
+  <AlertModal
+    :show="showAlert"
+    :type="alertType"
+    :title="alertTitle"
+    :message="alertMessage"
+    @close="showAlert = false"
+  />
+
 </template>
 
 <script setup>
-import { reactive, watch, ref } from 'vue';
+import { reactive, watch, ref, computed } from 'vue';
 import InputField from '@/Components/InputField.vue';
 import SelectInput from '@/Components/SelectInput.vue';
 import InputGroup from '@/Components/InputGroup.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import { router } from '@inertiajs/vue3';
+import DropToggleButton from '@/Components/DropToggleButton.vue';
+import SlotModal from '@/Components/SlotModal.vue';
+import AlertModal from '@/Components/AlertModal.vue';
 
 const emit = defineEmits(['update', 'validation']);
-const props = defineProps({ errors: Object });
+const props = defineProps({ 
+  errors: Object,
+  mortgages: {
+    type: Object,
+    default: () => [],
+  } 
+});
 
 const form = reactive({
   home_price: 100000,
@@ -209,10 +236,10 @@ const showAdditionalFields = ref(false);
 
 watch(() => [form.home_price, form.down_payment], ([price, amount]) => {
   if (!isAmountFocused.value) {
-    downPaymentAmountRaw.value = amount.toFixed(0);
+    downPaymentAmountRaw.value = Number(amount).toFixed(0);
   }
   if (!isPercentFocused.value) {
-    downPaymentPercentRaw.value = ((amount / price) * 100).toFixed(0);
+    downPaymentPercentRaw.value = ((Number(amount) / price) * 100).toFixed(0);
   }
 });
 
@@ -231,14 +258,14 @@ const updateDownPaymentPercent = (rawValue) => {
 
 const formatDownPaymentAmount = () => {
   isAmountFocused.value = false;
-  const formatted = parseFloat(downPaymentAmountRaw.value || 0).toFixed(2);
+  const formatted = parseFloat(downPaymentAmountRaw.value || 0);
   downPaymentAmountRaw.value = formatted;
   form.down_payment = parseFloat(formatted);
 };
 
 const formatDownPaymentPercent = () => {
   isPercentFocused.value = false;
-  const formatted = parseFloat(downPaymentPercentRaw.value || 0).toFixed(2);
+  const formatted = parseFloat(downPaymentPercentRaw.value || 0);
   downPaymentPercentRaw.value = formatted;
   const amount = (parseFloat(formatted) / 100) * form.home_price;
   form.down_payment = Math.min(amount, form.home_price);
@@ -310,4 +337,103 @@ watch(form, (values) => {
   emit('validation', errors);
 }, { deep: true, immediate: true });
 
+// Load and Saving
+const showSaveModal = ref(false);
+const showLoadModal = ref(false);
+
+const getSlotMortgage = (slot) => 
+    props.mortgages.find(m => m.slot === slot);
+
+const saveToSlot = async (slot) => {
+    if (Object.keys(validate()).length > 0) return;
+  
+  try {
+    await router.post(route('mortgage.save', { slot }), form);
+    showFeedback('success', 'Saved!', `Mortgage details saved to slot ${slot}`);
+    router.reload({ only: ['mortgages'] });
+  } catch (error) {
+    showFeedback('error', 'Error!', 'Failed to save mortgage details');
+  }
+};
+
+const loadFromSlot = (slot) => {
+    const mortgage = getSlotMortgage(slot);
+    if (!mortgage) {
+      showFeedback('error', 'Error!', 'No saved data found');
+      return;
+    }
+
+    try {
+      Object.keys(form).forEach(key => {
+        if (typeof form[key] === 'number') form[key] = 0;
+        else if (typeof form[key] === 'string') form[key] = '';
+      });
+
+      form.home_price = Number(mortgage.home_price).toFixed(0);
+      form.down_payment = Number(mortgage.down_payment).toFixed(0);
+      form.loan_type = mortgage.loan_type;
+      form.interest_rate = parseFloat(mortgage.interest_rate).toFixed(1);
+      form.loan_term = Number(mortgage.loan_term);
+      form.monthly_property_tax = formatDecimal(mortgage.monthly_property_tax);
+      form.monthly_home_insurance = formatDecimal(mortgage.monthly_home_insurance);
+      form.monthly_hoa = formatDecimal(mortgage.monthly_hoa);
+
+      if (mortgage.adjustables?.length > 0) {
+          const adj = mortgage.adjustables[0];
+          form.initial_term = Number(adj.initial_term);
+          form.initial_rate = parseFloat(adj.initial_rate).toFixed(1);
+          form.margin = parseFloat(adj.margin).toFixed(1);
+          form.periodic_cap = parseFloat(adj.periodic_cap).toFixed(1);
+          form.lifetime_cap = parseFloat(adj.lifetime_cap).toFixed(1);
+          form.interest_only_period = adj.interest_only_period ? 
+              Number(adj.interest_only_period) : 0;
+      } else {
+          form.initial_term = 5;
+          form.initial_rate = 3.5;
+          form.margin = 2.0;
+          form.periodic_cap = 2.0;
+          form.lifetime_cap = 5.0;
+          form.interest_only_period = 0;
+      }
+
+      showLoadModal.value = false;
+      showFeedback('success', 'Loaded!', `Mortgage details loaded from slot ${slot}`);
+    } catch (error) {
+      showFeedback('error', 'Error!', 'Failed to load mortgage details');
+    }
+};
+
+const saveSlots = computed(() => [1, 2, 3].map(slot => ({
+  number: slot,
+  savedDate: getSlotMortgage(slot)?.updated_at
+})));
+
+const loadSlots = computed(() => [1, 2, 3].map(slot => ({
+  number: slot,
+  savedDate: getSlotMortgage(slot)?.updated_at
+})));
+
+const formatDecimal = (value) => {
+    const num = Number(value);
+    return num % 1 === 0 ? num.toFixed(0) : num.toFixed(2);
+};
+
+// Alert 
+const showAlert = ref(false);
+const alertType = ref('success');
+const alertTitle = ref('');
+const alertMessage = ref('');
+
+const showFeedback = (type, title, message, duration = 3000) => {
+  alertType.value = type;
+  alertTitle.value = title;
+  alertMessage.value = message;
+  showAlert.value = true;
+  
+  if (duration > 0) {
+    setTimeout(() => {
+      showAlert.value = false;
+    }, duration);
+  }
+};
 </script>

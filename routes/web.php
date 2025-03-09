@@ -9,9 +9,9 @@ Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
 
-Route::get('/how-to-use', function () {
-    return Inertia::render('How-To-Use');
-})->name('how-to-use');
+Route::get('/about', function () {
+    return Inertia::render('About');
+})->name('about');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

@@ -7,6 +7,13 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { calculateMonthlyPayment, calculateAmortizationSchedule } from './Util/calculations.js';
 import { reactive, watch, ref } from 'vue';
 
+const props = defineProps({
+  mortgages: {
+    type: Array,
+    default: () => []
+  }
+});
+
 const formData = reactive({
   home_price: 0,
   down_payment: 0,
@@ -97,6 +104,7 @@ watch(() => formData, calculateResults, { immediate: true });
                 @update="handleInputUpdate"
                 @validation="handleValidation"
                 :errors="validationErrors"
+                :mortgages="mortgages"
               />
             </div>
             <div class="w-4/5">
