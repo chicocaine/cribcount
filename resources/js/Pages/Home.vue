@@ -67,7 +67,7 @@ import { Link } from '@inertiajs/vue3';
 
                                 <!-- Secondary Button (How to Use) -->
                                 <Link
-                                    :href="route('how-to-use')" 
+                                    :href="route('about')" 
                                     class="px-6 py-2 border rounded-md transition text-center sm:w-auto w-full 
                                         -900 text-zinc-900 hover:bg-zinc-900 hover:text-white 
                                         dark:border-white dark:text-white dark:hover:bg-zinc-200 dark:hover:text-zinc-950"

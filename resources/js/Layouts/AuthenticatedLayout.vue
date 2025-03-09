@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ThemeToggle from '@/Components/ThemeToggle.vue';
@@ -35,7 +34,7 @@ const showingNavigationDropdown = ref(false);
                             <div class="hidden sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink :href="route('home')" :active="route().current('home')"> Home </NavLink>
                                 <NavLink :href="route('mortgage.calculator')" :active="route().current('mortgage.calculator')"> Calculator </NavLink>
-                                <NavLink :href="route('how-to-use')" :active="route().current('how-to-use')"> About Us </NavLink>
+                                <NavLink :href="route('about')" :active="route().current('about')"> About Us </NavLink>
                             </div>
                         </div>
 
@@ -120,7 +119,7 @@ const showingNavigationDropdown = ref(false);
                         <NavLink :href="route('mortgage.calculator')" :active="route().current('mortgage.calculator')" class="block px-4 py-2">
                             Calculator
                         </NavLink>
-                        <NavLink :href="route('how-to-use')" :active="route().current('how-to-use')" class="block px-4 py-2">
+                        <NavLink :href="route('about')" :active="route().current('about')" class="block px-4 py-2">
                             About Us
                         </NavLink>
                     </div>
@@ -154,6 +153,8 @@ const showingNavigationDropdown = ref(false);
                 </div>
 
             </header>
+
+            <ToastComponent />
 
             <!-- Page Content -->
             <main class="flex-1">

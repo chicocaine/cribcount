@@ -73,10 +73,10 @@ const props = defineProps({
 });
 
 const chartSeries = computed(() => [
-  props.results.monthlyPrincipalInterest,
-  props.results.monthly_property_tax,
-  props.results.monthly_home_insurance,
-  props.results.monthly_hoa
+  Number(props.results.monthlyPrincipalInterest || 0),
+  Number(props.results.monthly_property_tax || 0),
+  Number(props.results.monthly_home_insurance || 0),
+  Number(props.results.monthly_hoa || 0)
 ]);
 
 const isDarkMode = ref(false);
