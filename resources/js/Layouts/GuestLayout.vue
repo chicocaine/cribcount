@@ -8,7 +8,7 @@ import { Link } from '@inertiajs/vue3';
         class="flex min-h-screen flex-col items-center bg-zinc-300 pt-6 sm:justify-center sm:pt-0 dark:bg-zinc-900"
     >
         <div>
-            <Link href="/">
+            <Link :href="route('home')">
                 <ApplicationLogo class="h-20 w-20 fill-current text-gray-500" />
             </Link>
         </div>
