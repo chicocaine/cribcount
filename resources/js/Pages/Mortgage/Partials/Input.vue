@@ -369,22 +369,22 @@ const loadFromSlot = (slot) => {
         else if (typeof form[key] === 'string') form[key] = '';
       });
 
-      form.home_price = Number(mortgage.home_price).toFixed(0);
-      form.down_payment = Number(mortgage.down_payment).toFixed(0);
+      form.home_price = Number(mortgage.home_price);
+      form.down_payment = Number(mortgage.down_payment);
       form.loan_type = mortgage.loan_type;
-      form.interest_rate = parseFloat(mortgage.interest_rate).toFixed(1);
+      form.interest_rate = parseFloat(mortgage.interest_rate);
       form.loan_term = Number(mortgage.loan_term);
       form.monthly_property_tax = formatDecimal(mortgage.monthly_property_tax);
       form.monthly_home_insurance = formatDecimal(mortgage.monthly_home_insurance);
       form.monthly_hoa = formatDecimal(mortgage.monthly_hoa);
 
-      if (mortgage.adjustables?.length > 0) {
-          const adj = mortgage.adjustables[0];
+      if (mortgage.adjustable !== null) {
+          const adj = mortgage.adjustable;
           form.initial_term = Number(adj.initial_term);
-          form.initial_rate = parseFloat(adj.initial_rate).toFixed(1);
-          form.margin = parseFloat(adj.margin).toFixed(1);
-          form.periodic_cap = parseFloat(adj.periodic_cap).toFixed(1);
-          form.lifetime_cap = parseFloat(adj.lifetime_cap).toFixed(1);
+          form.initial_rate = parseFloat(adj.initial_rate);
+          form.margin = parseFloat(adj.margin);
+          form.periodic_cap = parseFloat(adj.periodic_cap);
+          form.lifetime_cap = parseFloat(adj.lifetime_cap);
           form.interest_only_period = adj.interest_only_period ? 
               Number(adj.interest_only_period) : 0;
       } else {

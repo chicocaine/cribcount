@@ -20,6 +20,8 @@
 </template>
 
 <script setup>
+import ValidationError from '@/Components/ValidationError.vue';
+
 defineProps({
   label: String,
   modelValue: [String, Number],

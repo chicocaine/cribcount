@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import ValidationError from './ValidationError.vue';
+import ValidationError from '@/Components/ValidationError.vue';
 
 defineProps({
   label: String,

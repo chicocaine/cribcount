@@ -13,8 +13,6 @@ const showDropdown = ref(false)
 const showingNavigationDropdown = ref(false);
 </script>
 
-
-
 <template>
     <div class="min-h-screen flex flex-col bg-white dark:bg-zinc-950">
         <div>
@@ -157,8 +155,6 @@ const showingNavigationDropdown = ref(false);
                 </div>
 
             </header>
-
-            <ToastComponent />
 
             <!-- Page Content -->
             <main class="flex-1">
