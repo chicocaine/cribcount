@@ -8,14 +8,14 @@
       <button
         @click="prevYear"
         :disabled="currentYear === 1"
-        class="rounded-md border border-zinc-300 px-3 py-1 text-sm font-medium shadow-sm hover:bg-zinc-50 focus:border-red-500 focus:ring-red-500 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:focus:border-red-600 dark:focus:ring-red-600"
+        class="rounded-md border border-zinc-300 px-3 py-1 text-sm font-medium shadow-sm hover:bg-zinc-50 focus:border-orange-500 focus:ring-orange-500 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:focus:border-orange-600 dark:focus:ring-orange-600"
       >
         &lt;
       </button>
       
       <select
         v-model="currentYear"
-        class="rounded-md border-zinc-300 shadow-sm focus:border-red-500 focus:ring-red-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:focus:border-red-600 dark:focus:ring-red-600"
+        class="rounded-md border-zinc-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:focus:border-orange-600 dark:focus:ring-orange-600"
       >
         <option v-for="year in totalYears" :value="year" :key="year">
           Year {{ year }}
@@ -25,7 +25,7 @@
       <button
         @click="nextYear"
         :disabled="currentYear === totalYears"
-        class="rounded-md border border-zinc-300 px-3 py-1 text-sm font-medium shadow-sm hover:bg-zinc-50 focus:border-red-500 focus:ring-red-500 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:focus:border-red-600 dark:focus:ring-red-600"
+        class="rounded-md border border-zinc-300 px-3 py-1 text-sm font-medium shadow-sm hover:bg-zinc-50 focus:border-orange-500 focus:ring-orange-500 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:focus:border-orange-600 dark:focus:ring-orange-600"
       >
         &gt;
       </button>
