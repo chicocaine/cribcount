@@ -10,3 +10,4 @@ export function currency(value) {
 export function percentage(value) {
   return parseFloat(value).toFixed(2) + '%';
 }
+

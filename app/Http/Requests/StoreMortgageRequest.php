@@ -10,7 +10,7 @@ class StoreMortgageRequest extends FormRequest
     public function rules()
     {
         return [
-            // Core mortgage fields
+            // Mortgage fields
             'home_price' => 'required|numeric|min:0|max:1000000000',
             'down_payment' => 'required|numeric|min:0|max:100',
             'loan_type' => ['required', Rule::in(['fixed', 'arm'])],
@@ -26,7 +26,7 @@ class StoreMortgageRequest extends FormRequest
             'monthly_home_insurance' => 'nullable|numeric|min:0|max:10000',
             'monthly_hoa' => 'nullable|numeric|min:0|max:10000',
 
-            // Adjustable rate fields (ARM only)
+            // Adjustable rate fields 
             'adjustable.initial_term' => [
                 'required_if:loan_type,arm',
                 'integer',
@@ -89,7 +89,6 @@ class StoreMortgageRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        // Ensure numeric values for all fields
         $this->merge([
             'home_price' => (float) $this->home_price,
             'down_payment' => (float) $this->down_payment,

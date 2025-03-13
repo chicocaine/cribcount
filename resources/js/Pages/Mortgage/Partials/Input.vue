@@ -1,3 +1,204 @@
+<script setup>
+import { reactive, watch, ref, computed } from 'vue';
+import { router } from '@inertiajs/vue3';
+import { validateMortgage } from '../Util/inputValidation';
+import InputField from '@/Components/InputField.vue';
+import InputGroup from '@/Components/InputGroup.vue';
+import SelectInput from '@/Components/SelectInput.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import DropToggleButton from '@/Components/DropToggleButton.vue';
+import SlotModal from '@/Components/SlotModal.vue';
+import AlertModal from '@/Components/AlertModal.vue';
+
+const emit = defineEmits(['update', 'validation']);
+
+const props = defineProps({ 
+  errors: Object,
+  mortgages: {
+    type: Object,
+    default: () => [],
+  } 
+});
+
+const form = reactive({
+  home_price: 100000,
+  down_payment: 10000,
+  loan_type: 'fixed',
+  interest_rate: 3.5,
+  loan_term: 30,
+  monthly_property_tax: 0,
+  monthly_home_insurance: 0,
+  monthly_hoa: 0,
+  initial_term: 5,
+  initial_rate: 3.5,
+  margin: 2.0,
+  periodic_cap: 2.0,
+  lifetime_cap: 5.0,
+  interest_only_period: 0,
+});
+
+const isAmountFocused = ref(false);
+const isPercentFocused = ref(false);
+const downPaymentAmountRaw = ref(form.down_payment);
+const downPaymentPercentRaw = ref(((form.down_payment / form.home_price) * 100));
+
+const showAdditionalFields = ref(false);
+
+watch(() => [form.home_price, form.down_payment], ([price, amount]) => {
+  if (!isAmountFocused.value) {
+    downPaymentAmountRaw.value = Number(amount).toFixed(0);
+  }
+  if (!isPercentFocused.value) {
+    downPaymentPercentRaw.value = ((Number(amount) / price) * 100).toFixed(0);
+  }
+});
+
+const updateDownPaymentAmount = (rawValue) => {
+  downPaymentAmountRaw.value = rawValue;
+  const amount = Math.max(parseFloat(rawValue) || 0, 0);
+  form.down_payment = Math.min(amount, form.home_price);
+};
+
+const updateDownPaymentPercent = (rawValue) => {
+  downPaymentPercentRaw.value = rawValue;
+  const percent = Math.max(parseFloat(rawValue) || 0, 0);
+  const amount = (percent / 100) * form.home_price;
+  form.down_payment = Math.min(amount, form.home_price);
+};
+
+const formatDownPaymentAmount = () => {
+  isAmountFocused.value = false;
+  const formatted = parseFloat(downPaymentAmountRaw.value || 0);
+  downPaymentAmountRaw.value = formatted;
+  form.down_payment = parseFloat(formatted);
+};
+
+const formatDownPaymentPercent = () => {
+  isPercentFocused.value = false;
+  const formatted = parseFloat(downPaymentPercentRaw.value || 0);
+  downPaymentPercentRaw.value = formatted;
+  const amount = (parseFloat(formatted) / 100) * form.home_price;
+  form.down_payment = Math.min(amount, form.home_price);
+};
+
+watch(() => form.loan_type, () => {
+  if (form.loan_type === 'fixed') {
+    delete props.errors.initial_term;
+    delete props.errors.margin;
+    delete props.errors.periodic_cap;
+    delete props.errors.lifetime_cap;
+  }
+});
+
+// Validate forms
+watch(form, (values) => {
+  const errors = validateMortgage(form, downPaymentPercentRaw.value);
+  emit('update', { ...values, isValid: Object.keys(errors).length === 0 });
+  emit('validation', errors);
+}, { deep: true, immediate: true });
+    
+// Load and Saving
+const showSaveModal = ref(false);
+const showLoadModal = ref(false);
+
+const getSlotMortgage = (slot) => 
+    props.mortgages.find(m => m.slot === slot);
+
+const saveToSlot = async (slot) => {
+    if (Object.keys(validate()).length > 0) return;
+  
+  try {
+    await router.post(route('mortgage.save', { slot }), form);
+    showFeedback('success', 'Saved!', `Mortgage details saved to slot ${slot}`);
+    router.reload({ only: ['mortgages'] });
+  } catch (error) {
+    showFeedback('error', 'Error!', 'Failed to save mortgage details');
+  }
+};
+
+const loadFromSlot = (slot) => {
+    const mortgage = getSlotMortgage(slot);
+    if (!mortgage) {
+      showFeedback('error', 'Error!', 'No saved data found');
+      return;
+    }
+
+    try {
+      Object.keys(form).forEach(key => {
+        if (typeof form[key] === 'number') form[key] = 0;
+        else if (typeof form[key] === 'string') form[key] = '';
+      });
+
+      form.home_price = Number(mortgage.home_price);
+      form.down_payment = Number(mortgage.down_payment);
+      form.loan_type = mortgage.loan_type;
+      form.interest_rate = parseFloat(mortgage.interest_rate);
+      form.loan_term = Number(mortgage.loan_term);
+      form.monthly_property_tax = formatDecimal(mortgage.monthly_property_tax);
+      form.monthly_home_insurance = formatDecimal(mortgage.monthly_home_insurance);
+      form.monthly_hoa = formatDecimal(mortgage.monthly_hoa);
+
+      if (mortgage.adjustable !== null) {
+          const adj = mortgage.adjustable;
+          form.initial_term = Number(adj.initial_term);
+          form.initial_rate = parseFloat(adj.initial_rate);
+          form.margin = parseFloat(adj.margin);
+          form.periodic_cap = parseFloat(adj.periodic_cap);
+          form.lifetime_cap = parseFloat(adj.lifetime_cap);
+          form.interest_only_period = adj.interest_only_period ? 
+              Number(adj.interest_only_period) : 0;
+      } else {
+          form.initial_term = 5;
+          form.initial_rate = 3.5;
+          form.margin = 2.0;
+          form.periodic_cap = 2.0;
+          form.lifetime_cap = 5.0;
+          form.interest_only_period = 0;
+      }
+
+      showLoadModal.value = false;
+      showFeedback('success', 'Loaded!', `Mortgage details loaded from slot ${slot}`);
+    } catch (error) {
+      showFeedback('error', 'Error!', 'Failed to load mortgage details');
+    }
+};
+
+const saveSlots = computed(() => [1, 2, 3].map(slot => ({
+  number: slot,
+  savedDate: getSlotMortgage(slot)?.updated_at
+})));
+
+const loadSlots = computed(() => [1, 2, 3].map(slot => ({
+  number: slot,
+  savedDate: getSlotMortgage(slot)?.updated_at
+})));
+
+const formatDecimal = (value) => {
+    const num = Number(value);
+    return num % 1 === 0 ? num.toFixed(0) : num.toFixed(2);
+};
+
+// Alert 
+const showAlert = ref(false);
+const alertType = ref('success');
+const alertTitle = ref('');
+const alertMessage = ref('');
+
+const showFeedback = (type, title, message, duration = 3000) => {
+  alertType.value = type;
+  alertTitle.value = title;
+  alertMessage.value = message;
+  showAlert.value = true;
+  
+  if (duration > 0) {
+    setTimeout(() => {
+      showAlert.value = false;
+    }, duration);
+  }
+};
+</script>
+
 <template>
   <div class="space-y-2 p-4 lg:p-0">
     <InputField
@@ -45,6 +246,7 @@
       label="Loan Term (years)"
       v-model.number="form.loan_term"
       type="number"
+      step="5"
       :error="errors.loan_term"
       :min="0"
     />
@@ -189,251 +391,3 @@
 
 </template>
 
-<script setup>
-import { reactive, watch, ref, computed } from 'vue';
-import InputField from '@/Components/InputField.vue';
-import SelectInput from '@/Components/SelectInput.vue';
-import InputGroup from '@/Components/InputGroup.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
-import { router } from '@inertiajs/vue3';
-import DropToggleButton from '@/Components/DropToggleButton.vue';
-import SlotModal from '@/Components/SlotModal.vue';
-import AlertModal from '@/Components/AlertModal.vue';
-
-const emit = defineEmits(['update', 'validation']);
-const props = defineProps({ 
-  errors: Object,
-  mortgages: {
-    type: Object,
-    default: () => [],
-  } 
-});
-
-const form = reactive({
-  home_price: 100000,
-  down_payment: 10000,
-  loan_type: 'fixed',
-  interest_rate: 3.5,
-  loan_term: 30,
-  monthly_property_tax: 0,
-  monthly_home_insurance: 0,
-  monthly_hoa: 0,
-  initial_term: 5,
-  initial_rate: 3.5,
-  margin: 2.0,
-  periodic_cap: 2.0,
-  lifetime_cap: 5.0,
-  interest_only_period: 0,
-});
-
-const isAmountFocused = ref(false);
-const isPercentFocused = ref(false);
-const downPaymentAmountRaw = ref(form.down_payment);
-const downPaymentPercentRaw = ref(((form.down_payment / form.home_price) * 100));
-
-const showAdditionalFields = ref(false);
-
-watch(() => [form.home_price, form.down_payment], ([price, amount]) => {
-  if (!isAmountFocused.value) {
-    downPaymentAmountRaw.value = Number(amount).toFixed(0);
-  }
-  if (!isPercentFocused.value) {
-    downPaymentPercentRaw.value = ((Number(amount) / price) * 100).toFixed(0);
-  }
-});
-
-const updateDownPaymentAmount = (rawValue) => {
-  downPaymentAmountRaw.value = rawValue;
-  const amount = Math.max(parseFloat(rawValue) || 0, 0);
-  form.down_payment = Math.min(amount, form.home_price);
-};
-
-const updateDownPaymentPercent = (rawValue) => {
-  downPaymentPercentRaw.value = rawValue;
-  const percent = Math.max(parseFloat(rawValue) || 0, 0);
-  const amount = (percent / 100) * form.home_price;
-  form.down_payment = Math.min(amount, form.home_price);
-};
-
-const formatDownPaymentAmount = () => {
-  isAmountFocused.value = false;
-  const formatted = parseFloat(downPaymentAmountRaw.value || 0);
-  downPaymentAmountRaw.value = formatted;
-  form.down_payment = parseFloat(formatted);
-};
-
-const formatDownPaymentPercent = () => {
-  isPercentFocused.value = false;
-  const formatted = parseFloat(downPaymentPercentRaw.value || 0);
-  downPaymentPercentRaw.value = formatted;
-  const amount = (parseFloat(formatted) / 100) * form.home_price;
-  form.down_payment = Math.min(amount, form.home_price);
-};
-
-watch(() => form.loan_type, () => {
-  if (form.loan_type === 'fixed') {
-    delete props.errors.initial_term;
-    delete props.errors.margin;
-    delete props.errors.periodic_cap;
-    delete props.errors.lifetime_cap;
-  }
-});
-
-// Validation rules
-const validate = () => {
-  const errors = {};
-
-  if (form.home_price <= 0 || isNaN(form.home_price)) {
-    errors.home_price = 'Must be a positive value';
-  } 
-  if (form.down_payment < 0 || form.down_payment > form.home_price) {
-    errors.down_payment = 'Invalid down payment';
-  }
-
-  if (downPaymentPercentRaw.value !== null) {
-    if (downPaymentPercentRaw.value < 0 || downPaymentPercentRaw.value > 100) {
-      errors.down_payment = 'Percentage must be between 0-100';
-    }
-  }
-  if (form.down_payment >= form.home_price) {
-    errors.down_payment = 'Cannot exceed home price';
-  }
-  if (form.interest_rate <= 0 || form.interest_rate > 25) {
-    errors.interest_rate = 'Must be between 0.01% and 25%';
-  }
-  if (![10, 15, 20, 25, 30].includes(form.loan_term)) {
-    errors.loan_term = 'Invalid loan term';
-  }
-
-  if (form.loan_type === 'adjustable') {
-    if (form.initial_term >= form.loan_term) {
-      errors.initial_term = 'Must be less than total loan term';
-    }
-    if (form.margin < 0) errors.margin = 'Margin cannot be negative';
-    if (form.lifetime_cap < form.periodic_cap) {
-      errors.lifetime_cap = 'Must be greater than periodic cap';
-    }
-  }
-
-  if (form.monthly_property_tax < 0) {
-    errors.monthly_property_tax = 'Cannot be negative';
-  }
-  if (form.monthly_home_insurance < 0) {
-    errors.monthly_home_insurance = 'Cannot be negative';
-  }
-  if (form.monthly_hoa < 0) {
-    errors.monthly_hoa = 'Cannot be negative';
-  }
-
-  emit('validation', errors);
-  return errors;
-};
-
-// Validate on form change
-watch(form, (values) => {
-  const errors = validate();
-  emit('update', { ...values, isValid: Object.keys(errors).length === 0 });
-  emit('validation', errors);
-}, { deep: true, immediate: true });
-
-// Load and Saving
-const showSaveModal = ref(false);
-const showLoadModal = ref(false);
-
-const getSlotMortgage = (slot) => 
-    props.mortgages.find(m => m.slot === slot);
-
-const saveToSlot = async (slot) => {
-    if (Object.keys(validate()).length > 0) return;
-  
-  try {
-    await router.post(route('mortgage.save', { slot }), form);
-    showFeedback('success', 'Saved!', `Mortgage details saved to slot ${slot}`);
-    router.reload({ only: ['mortgages'] });
-  } catch (error) {
-    showFeedback('error', 'Error!', 'Failed to save mortgage details');
-  }
-};
-
-const loadFromSlot = (slot) => {
-    const mortgage = getSlotMortgage(slot);
-    if (!mortgage) {
-      showFeedback('error', 'Error!', 'No saved data found');
-      return;
-    }
-
-    try {
-      Object.keys(form).forEach(key => {
-        if (typeof form[key] === 'number') form[key] = 0;
-        else if (typeof form[key] === 'string') form[key] = '';
-      });
-
-      form.home_price = Number(mortgage.home_price);
-      form.down_payment = Number(mortgage.down_payment);
-      form.loan_type = mortgage.loan_type;
-      form.interest_rate = parseFloat(mortgage.interest_rate);
-      form.loan_term = Number(mortgage.loan_term);
-      form.monthly_property_tax = formatDecimal(mortgage.monthly_property_tax);
-      form.monthly_home_insurance = formatDecimal(mortgage.monthly_home_insurance);
-      form.monthly_hoa = formatDecimal(mortgage.monthly_hoa);
-
-      if (mortgage.adjustable !== null) {
-          const adj = mortgage.adjustable;
-          form.initial_term = Number(adj.initial_term);
-          form.initial_rate = parseFloat(adj.initial_rate);
-          form.margin = parseFloat(adj.margin);
-          form.periodic_cap = parseFloat(adj.periodic_cap);
-          form.lifetime_cap = parseFloat(adj.lifetime_cap);
-          form.interest_only_period = adj.interest_only_period ? 
-              Number(adj.interest_only_period) : 0;
-      } else {
-          form.initial_term = 5;
-          form.initial_rate = 3.5;
-          form.margin = 2.0;
-          form.periodic_cap = 2.0;
-          form.lifetime_cap = 5.0;
-          form.interest_only_period = 0;
-      }
-
-      showLoadModal.value = false;
-      showFeedback('success', 'Loaded!', `Mortgage details loaded from slot ${slot}`);
-    } catch (error) {
-      showFeedback('error', 'Error!', 'Failed to load mortgage details');
-    }
-};
-
-const saveSlots = computed(() => [1, 2, 3].map(slot => ({
-  number: slot,
-  savedDate: getSlotMortgage(slot)?.updated_at
-})));
-
-const loadSlots = computed(() => [1, 2, 3].map(slot => ({
-  number: slot,
-  savedDate: getSlotMortgage(slot)?.updated_at
-})));
-
-const formatDecimal = (value) => {
-    const num = Number(value);
-    return num % 1 === 0 ? num.toFixed(0) : num.toFixed(2);
-};
-
-// Alert 
-const showAlert = ref(false);
-const alertType = ref('success');
-const alertTitle = ref('');
-const alertMessage = ref('');
-
-const showFeedback = (type, title, message, duration = 3000) => {
-  alertType.value = type;
-  alertTitle.value = title;
-  alertMessage.value = message;
-  showAlert.value = true;
-  
-  if (duration > 0) {
-    setTimeout(() => {
-      showAlert.value = false;
-    }, duration);
-  }
-};
-</script>
